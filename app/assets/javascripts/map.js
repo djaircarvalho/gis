@@ -58,7 +58,7 @@ $( document ).ready(function() {
             var type = e.layerType,
                 layer = e.layer;
             drawnItems.addLayer(layer);
-            $('#wkt').val(toWKT(layer));
+            $('#quadra_localizacao').val(toWKT(layer));
         });
 
 });

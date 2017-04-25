@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :quadras
   get 'quadras/new'
 
   post 'quadras/create'
