@@ -24,9 +24,7 @@ class QuadrasController < ApplicationController
   # POST /quadras
   # POST /quadras.json
   def create
-  	byebug
     @quadra = Quadra.new(quadra_params)
-
     respond_to do |format|
       if @quadra.save
         format.html { redirect_to @quadra, notice: 'Quadra was successfully created.' }
