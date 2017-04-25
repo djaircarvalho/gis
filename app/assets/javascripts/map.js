@@ -3,14 +3,13 @@
       var lng, lat, coords = [];
       if (layer instanceof L.Polygon) {
           var latlngs = layer.getLatLngs();
-          for (var i = 0; i < latlngs.length; i++) {
-            for (var j = 0; j < latlngs[i].length; j++) {
-              coords.push(latlngs[i][j].lng + " " + latlngs[i][j].lat);
-              if (i === 0 && j===0) {
+          for (var i = 0; i < latlngs[0].length; i++) {
+              coords.push(latlngs[0][i].lng + " " + latlngs[0][i].lat);
+              if (i === 0) {
                 lng = latlngs[0][i].lng;
                 lat = latlngs[0][i].lat;
               }
-            }  
+             
           }
           
         return "POLYGON((" + coords.join(",") + "," + lng + " " + lat + "))";
