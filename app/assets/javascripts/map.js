@@ -60,7 +60,7 @@
             var type = e.layerType,
                 layer = e.layer;
             drawnItems.addLayer(layer);
-            $('#quadra_localizacao').val(toWKT(layer));
+            $('#rio_geom').val(toWKT(layer));
         });
 
 });

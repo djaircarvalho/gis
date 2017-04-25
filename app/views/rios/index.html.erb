@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Rios</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Descricao</th>
+      <th>Geom</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rios.each do |rio| %>
+      <tr>
+        <td><%= rio.descricao %></td>
+        <td><%= rio.geom %></td>
+        <td><%= link_to 'Show', rio %></td>
+        <td><%= link_to 'Edit', edit_rio_path(rio) %></td>
+        <td><%= link_to 'Destroy', rio, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rio', new_rio_path %>

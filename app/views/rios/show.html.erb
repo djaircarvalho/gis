@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Descricao:</strong>
+  <%= @rio.descricao %>
+</p>
+
+<p>
+  <strong>Geom:</strong>
+  <%= @rio.geom %>
+</p>
+
+<%= link_to 'Edit', edit_rio_path(@rio) %> |
+<%= link_to 'Back', rios_path %>

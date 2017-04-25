@@ -1,4 +1,4 @@
-<div id="map" class="map">
+<div id="map" class="mapa">
   <%=
     map(:center => {
       :latlng => [-5.360528731202039, -42.67536163330079],
@@ -7,5 +7,24 @@
   %>
 </div>
 <br>
-WKT:
-<input type="text" id="wkt" name="wtk">
+
+<div id='search-box'>
+  <form action='/search' id='search-form' method='get' target='_top'>
+    <input id='search-text' name='q' placeholder='Digite sua pesquisa' type='text'/>
+    <button id='search-button' type='submit'><span>Buscar</span></button>
+  </form>
+</div>
+
+<div class="layers">
+
+	<table class="table">
+		<tbody>
+			<tr>
+				<td>Quadras</td>
+				<td><%= link_to 'Detalhes'%></td>
+				<td><%= link_to 'Criar', quadras_new_path%></td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>
