@@ -1,0 +1,2 @@
+class Logradouro < ApplicationRecord
+end

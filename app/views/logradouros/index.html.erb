@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Logradouros</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Descricao</th>
+      <th>Localizacao</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @logradouros.each do |logradouro| %>
+      <tr>
+        <td><%= logradouro.descricao %></td>
+        <td><%= logradouro.localizacao %></td>
+        <td><%= link_to 'Show', logradouro %></td>
+        <td><%= link_to 'Edit', edit_logradouro_path(logradouro) %></td>
+        <td><%= link_to 'Destroy', logradouro, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Logradouro', new_logradouro_path %>

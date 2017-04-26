@@ -1,0 +1,27 @@
+<%= form_for(logradouro) do |f| %>
+  <% if logradouro.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(logradouro.errors.count, "error") %> prohibited this logradouro from being saved:</h2>
+
+      <ul>
+      <% logradouro.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :descricao %>
+    <%= f.text_field :descricao %>
+  </div>
+
+  <div class="field">
+    <%= f.label :localizacao %>
+    <%= f.text_field :localizacao %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
