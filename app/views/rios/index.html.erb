@@ -2,6 +2,36 @@
 
 <h1>Rios</h1>
 
+
+<div id="map">
+  <%=
+    map(:center => {
+      :latlng => [51.52238797921441, -0.08366235665359283],
+      :zoom => 18
+    })
+  %>
+</div>
+
+<script type="text/javascript">
+
+   var drawnItems = new L.FeatureGroup();
+   var rios = JSON.parse('<%=escape_javascript @rios.to_json %>'.replace(/&quot;/g,'"'));
+
+        
+     var wkt = new Wkt.Wkt();
+     
+    for (var i = 0; i < rios.length; i++) {
+        var rio = rios[i];
+        var obj = wkt.toObject(wkt.read(rio.geom));
+        
+        obj.bindPopup(rio.descricao);
+        obj.addTo(map);
+      }  
+     
+
+</script>
+
+
 <table>
   <thead>
     <tr>
