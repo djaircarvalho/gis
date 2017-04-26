@@ -4,7 +4,7 @@ class RiosController < ApplicationController
   # GET /rios
   # GET /rios.json
   def index
-    @rios = Rio.all
+    @rios = Rio.all.paginate(:page => params[:page], :per_page => 5)
   end
 
   # GET /rios/1

@@ -4,7 +4,7 @@ class QuadrasController < ApplicationController
   # GET /quadras
   # GET /quadras.json
   def index
-    @quadras = Quadra.all
+    @quadras = Quadra.all.paginate(:page => params[:page], :per_page => 5)
   end
 
   # GET /quadras/1
