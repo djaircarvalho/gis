@@ -21,8 +21,13 @@
 		<tbody>
 			<tr>
 				<td>Quadras</td>
-				<td><%= link_to 'Detalhes'%></td>
-				<td><%= link_to 'Criar', quadras_new_path%></td>
+				<td><%= link_to 'Detalhes', quadras_path, class:"link"%></td>
+				<td><%= link_to 'Criar', new_quadra_path, class:"link"%></td>
+			</tr>
+			<tr>
+				<td>Rios</td>
+				<td><%= link_to 'Detalhes', rios_path, class:"link"%></td>
+				<td><%= link_to 'Criar', new_rio_path, class:"link"%></td>
 			</tr>
 		</tbody>
 	</table>
