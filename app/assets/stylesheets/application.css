@@ -14,10 +14,6 @@
  *= require_tree .
  *= require_self
  */
- body{
- 	padding: 5px;
- 	margin:5px;
- }
 .mapa{
 
 	width: 100%;
@@ -32,7 +28,7 @@
 
 .conteudo{
 
-	/*padding: 20px;*/
+	padding: 5px;
 
 }
 
@@ -76,9 +72,9 @@
     font-size: 14px;
     color: #fff;
     text-align: center;
-    line-height: 42px;
+    line-height: 40px;
     border-width: 0;
-    background-color: #4d90fe; /*--define a cor do botão Buscar--*/
+    background-color: #286090; /*--define a cor do botão Buscar--*/
     -webkit-border-radius: 0px 5px 5px 0px;
     -moz-border-radius: 0px 5px 5px 0px;
     border-radius: 0px 5px 5px 0px;
@@ -115,4 +111,29 @@
 .direita{
 	float: right;
 	margin-right: 30px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #286090;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    color: white;
+    text-decoration: none;
 }
