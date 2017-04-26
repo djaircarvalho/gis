@@ -8,6 +8,36 @@
 </div>
 <br>
 
+<script type="text/javascript">
+
+   
+   var quadras = JSON.parse('<%=escape_javascript @quadras.to_json %>'.replace(/&quot;/g,'"'));
+
+        
+     var wkt = new Wkt.Wkt();
+     
+    for (var i = 0; i < quadras.length; i++) {
+        var quadra = quadras[i];
+        var obj = wkt.toObject(wkt.read(quadra.localizacao));
+        obj.bindPopup(quadra.descricao);
+        obj.addTo(map);
+      }  
+
+      var rios = JSON.parse('<%=escape_javascript @rios.to_json %>'.replace(/&quot;/g,'"'));
+
+     
+    for (var i = 0; i < rios.length; i++) {
+        var rio = rios[i];
+        var obj = wkt.toObject(wkt.read(rio.geom));
+        
+        obj.bindPopup(rio.descricao);
+        obj.addTo(map);
+      }  
+     
+
+</script>
+
+
 <div id='search-box'>
   <form action='/search' id='search-form' method='get' target='_top'>
     <input id='search-text' name='q' placeholder='Digite sua pesquisa' type='text'/>
