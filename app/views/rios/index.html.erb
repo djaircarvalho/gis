@@ -3,7 +3,7 @@
   <%=
     map(:center => {
       :latlng => [-5.360528731202039, -42.67536163330079],
-      :zoom => 16
+      :zoom => 15
     });
   %>
 </div>
@@ -11,8 +11,16 @@
 <p id="notice"><%= notice %></p>
 
 <h2>Rios
-<%= link_to 'Add', new_rio_path , class:"btn btn-primary direita"%>
+<%= link_to '+', new_rio_path , class:"btn btn-primary"%>
 </h2>
+<br/>
+<div id='search-box'>
+  <form action='/search' id='search-form' method='get' target='_top'>
+    <input id='search-text' name='q' placeholder='Digite sua pesquisa' type='text'/>
+    <button id='search-button' type='submit'><span>Buscar</span></button>
+  </form>
+</div>
+<br/>
 
 
 <script type="text/javascript">

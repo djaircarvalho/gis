@@ -86,9 +86,8 @@
 }
 .layers{
 
-	float: left;
-	width: 450px;
 	padding: 10px;
+	margin-left: 20px;
 	margin:10px;	
 }
 
