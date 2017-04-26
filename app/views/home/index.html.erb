@@ -20,6 +20,9 @@
         var quadra = quadras[i];
         var obj = wkt.toObject(wkt.read(quadra.localizacao));
         obj.bindPopup(quadra.descricao);
+        obj.setStyle({
+		    color: 'green'
+		});
         obj.addTo(map);
       }  
 
