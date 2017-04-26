@@ -1,6 +1,45 @@
 <h1>Editing Quadra</h1>
 
+<div id="map" class="mapa">
+  <%=
+    map(:center => {
+      :latlng => [-5.360528731202039, -42.67536163330079],
+      :zoom => 16
+    });
+  %>
+</div>
+
 <%= render 'form', quadra: @quadra %>
 
 <%= link_to 'Show', @quadra %> |
 <%= link_to 'Back', quadras_path %>
+
+<script>
+
+	var editableLayers = new L.FeatureGroup();
+    map.addLayer(editableLayers);
+
+	 var options = {
+        draw:false,
+            polygon: false,
+            circle: false, // Turns off this drawing tool
+            rectangle: false,
+            marker:false,
+        edit: {
+            featureGroup: editableLayers, //REQUIRED!!
+            remove: false
+        }
+    };
+
+	var drawControl = new L.Control.Draw(options);
+    map.addControl(drawControl);
+    var quadra = JSON.parse('<%=escape_javascript @quadra.to_json %>'.replace(/&quot;/g,'"'));
+	var wkt = new Wkt.Wkt();
+	var obj = wkt.toObject(wkt.read(quadra.localizacao));
+
+	obj.bindPopup(quadra.descricao);
+	obj.addTo(editableLayers);
+  
+     
+
+</script>
