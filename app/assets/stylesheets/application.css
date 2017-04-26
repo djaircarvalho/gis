@@ -18,7 +18,7 @@
 
 	width: 100%;
 	max-width: 800px;
-	height: 700px;
+	height: 800px;
 	max-height: 800px;
 	float: left;
 
@@ -28,7 +28,7 @@
 
 .conteudo{
 
-	padding: 20px;
+	/*padding: 20px;*/
 
 }
 
@@ -82,5 +82,24 @@
 }
 .layers{
 
-	float: left;	
+	float: left;
+	width: 450px;
+	padding: 10px;
+	margin:10px;	
+}
+
+
+.caixa{
+	width: 20%;
+    padding: 11px 0 12px 1em;
+    color: #333;
+    outline: none;
+}
+
+.link{
+	color: #286090 !important; 
+}
+
+.link:hover{
+	background-color: rgba(0, 0, 0, 0);
 }

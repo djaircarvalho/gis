@@ -1,17 +1,18 @@
-<h1>New Rio</h1>
 
-<div id="map">
+<div id="map" class="mapa">
   <%=
     map(:center => {
-      :latlng => [51.52238797921441, -0.08366235665359283],
-      :zoom => 18
+      :latlng => [-5.360528731202039, -42.67536163330079],
+      :zoom => 16
     })
   %>
 </div>
 
+<h1>New Rio</h1>
+
 <%= render 'form', rio: @rio %>
 
-<%= link_to 'Back', rios_path %>
+<%= link_to 'Back', rios_path ,class:"btn btn-default"%>
 
 
    
