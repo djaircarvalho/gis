@@ -14,6 +14,10 @@
  *= require_tree .
  *= require_self
  */
+ body{
+ 	padding: 5px;
+ 	margin:5px;
+ }
 .mapa{
 
 	width: 100%;
@@ -102,4 +106,13 @@
 
 .link:hover{
 	background-color: rgba(0, 0, 0, 0);
+}
+
+.table{
+	width: 35%;
+}
+
+.direita{
+	float: right;
+	margin-right: 30px;
 }
