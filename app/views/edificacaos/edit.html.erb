@@ -68,9 +68,7 @@
 		var wkt = new Wkt.Wkt();
 		var obj = wkt.toObject(wkt.read(edificacao.geom));
 
-		obj.setStyle({
-		  color: '#010189'
-		});
+
 		obj.addTo(drawnItems); 
  		  map.addControl(drawControl);
 

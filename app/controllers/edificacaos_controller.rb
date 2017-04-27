@@ -69,6 +69,6 @@ class EdificacaosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def edificacao_params
-      params.require(:edificacao).permit(:geom)
+      params.require(:edificacao).permit(:descricao, :geom)
     end
 end
