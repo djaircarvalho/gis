@@ -55,9 +55,7 @@
     for (var i = 0; i < edificacaos.length; i++) {
         var edificacao = edificacaos[i];
         var obj = wkt.toObject(wkt.read(edificacao.geom));
-        obj.setStyle({
-          color: '#010189'
-      });
+        obj.bindPopup(edificacao.descricao);
 
         obj.addTo(map);
       } 

@@ -49,14 +49,10 @@
 
         var drawControl = new L.Control.Draw({
          draw: {
-          polygon: {
-           shapeOptions: {
-            color: 'purple'
-           },
-          },
+          polygon: false,
           polyline: false,
           circle: false,
-          marker: false
+          marker: {}
          },
          edit: {
           featureGroup: drawnItems
