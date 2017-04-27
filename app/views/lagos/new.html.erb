@@ -2,19 +2,16 @@
   <%=
     map(:center => {
       :latlng => [-5.360528731202039, -42.67536163330079],
-      :zoom => 16
+      :zoom => 18
     })
   %>
 </div>
 
-<div>
-  <h1>New Logradouro</h1>
+<h1>New Lago</h1>
 
-  <%= render 'form', logradouro: @logradouro %>
+<%= render 'form', lago: @lago %>
 
-  <%= link_to 'Back', logradouros_path, class:"btn btn-default" %>
-  
-</div>
+<%= link_to 'Back', lagos_path, class:"btn btn-default" %>
 
 <script type="text/javascript">
 
@@ -74,7 +71,7 @@
                 layer = e.layer;
             drawnItems.addLayer(layer);
             var wkt_string = toWKT(layer);
-            $('#logradouro_localizacao').val(wkt_string);
+            $('#lago_geom').val(wkt_string);
              var wkt = new Wkt.Wkt();
             console.log(wkt.read(wkt_string))
         });

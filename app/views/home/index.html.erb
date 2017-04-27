@@ -60,7 +60,18 @@
       });
 
         obj.addTo(map);
-      }  
+      } 
+      
+    var lagos = JSON.parse('<%=escape_javascript @lagos.to_json %>'.replace(/&quot;/g,'"'));
+
+    for (var i = 0; i < lagos.length; i++) {
+        var lago = lagos[i];
+        var obj = wkt.toObject(wkt.read(lago.geom));
+        obj.setStyle({
+          color: 'blue'
+      });
+        obj.addTo(map);
+      }   
      
 
 </script>
@@ -101,6 +112,11 @@
         <td>Edificações</td>
         <td><%= link_to 'Detalhes', edificacaos_path, class:""%></td>
         <td><%= link_to 'Adicionar', new_edificacao_path, class:""%></td>
+      </tr>
+      <tr>
+        <td>Lagos</td>
+        <td><%= link_to 'Detalhes', lagos_path, class:""%></td>
+        <td><%= link_to 'Adicionar', new_lago_path, class:""%></td>
       </tr>
 		</tbody>
 	</table>

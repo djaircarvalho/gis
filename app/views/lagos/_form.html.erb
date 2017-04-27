@@ -1,0 +1,23 @@
+<%= form_for(lago) do |f| %>
+  <% if lago.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(lago.errors.count, "error") %> prohibited this lago from being saved:</h2>
+
+      <ul>
+      <% lago.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :geom , class:"control-label"%>
+    <%= f.text_field :geom , class:"form-control caixa"%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Save', class:"btn btn-primary"%>
+  </div>
+<% end %>
+<br/>

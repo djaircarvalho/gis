@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :lagos
   resources :edificacaos
   resources :logradouros
   resources :rios

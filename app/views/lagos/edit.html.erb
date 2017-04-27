@@ -7,17 +7,14 @@
   %>
 </div>
 
-<div>
-  <h1>New Logradouro</h1>
+<h1>Editing Lago</h1>
 
-  <%= render 'form', logradouro: @logradouro %>
+<%= render 'form', lago: @lago %>
 
-  <%= link_to 'Back', logradouros_path, class:"btn btn-default" %>
-  
-</div>
+<%= link_to 'Back', lagos_path, class:"btn btn-default" %>
+
 
 <script type="text/javascript">
-
 	function toWKT(layer) {
       var lng, lat, coords = [];
       if (layer instanceof L.Polygon) {
@@ -66,17 +63,22 @@
           featureGroup: drawnItems
          }
         });
- 
- 		 map.addControl(drawControl);
+      var lago = JSON.parse('<%=escape_javascript @lago.to_json %>'.replace(/&quot;/g,'"'));
+      var wkt = new Wkt.Wkt();
+      var obj = wkt.toObject(wkt.read(lago.geom));
+      obj.setStyle({
+          color: 'blue'
+      });
+      obj.addTo(drawnItems); 
+ 		  
+	  map.addControl(drawControl);
 
-        map.on('draw:created', function (e) {
-            var type = e.layerType,
-                layer = e.layer;
-            drawnItems.addLayer(layer);
-            var wkt_string = toWKT(layer);
-            $('#logradouro_localizacao').val(wkt_string);
-             var wkt = new Wkt.Wkt();
-            console.log(wkt.read(wkt_string))
-        });
+      map.on('draw:created', function (e) {
+          var type = e.layerType,
+              layer = e.layer;
+          drawnItems.addLayer(layer);
+          $('#lago_geom').val(toWKT(layer));
+      });
 
+        
 </script>

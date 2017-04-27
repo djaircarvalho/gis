@@ -1,0 +1,2 @@
+class Lago < ApplicationRecord
+end

@@ -4,5 +4,6 @@ class HomeController < ApplicationController
   	@rios = Rio.all
   	@logradouros = Logradouro.all
   	@edificacaos = Edificacao.all
+  	@lagos = Lago.all
   end
 end
