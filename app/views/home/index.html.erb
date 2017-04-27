@@ -33,7 +33,6 @@
         var rio = rios[i];
         var obj = wkt.toObject(wkt.read(rio.geom));
         
-        obj.bindPopup(rio.descricao);
         obj.addTo(map);
       }
 
@@ -48,6 +47,18 @@
         obj.setStyle({
           color: 'red'
         });
+        obj.addTo(map);
+      }
+
+    var edificacaos = JSON.parse('<%=escape_javascript @edificacaos.to_json %>'.replace(/&quot;/g,'"'));
+
+    for (var i = 0; i < edificacaos.length; i++) {
+        var edificacao = edificacaos[i];
+        var obj = wkt.toObject(wkt.read(edificacao.geom));
+        obj.setStyle({
+          color: '#010189'
+      });
+
         obj.addTo(map);
       }  
      
@@ -85,6 +96,11 @@
         <td>Logradouros</td>
         <td><%= link_to 'Detalhes', logradouros_path, class:""%></td>
         <td><%= link_to 'Adicionar', new_logradouro_path, class:""%></td>
+      </tr>
+      <tr>
+        <td>Edificações</td>
+        <td><%= link_to 'Detalhes', edificacaos_path, class:""%></td>
+        <td><%= link_to 'Adicionar', new_edificacao_path, class:""%></td>
       </tr>
 		</tbody>
 	</table>

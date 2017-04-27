@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<div id="map" class="mapa">
+  <%=
+    map(:center => {
+      :latlng => [-5.360528731202039, -42.67536163330079],
+      :zoom => 16
+    })
+  %>
+</div>
+
+<script type="text/javascript">
+
+   var drawnItems = new L.FeatureGroup();
+   var edificacaos = JSON.parse('<%=escape_javascript @edificacaos.to_json %>'.replace(/&quot;/g,'"'));
+
+        
+     var wkt = new Wkt.Wkt();
+     
+    for (var i = 0; i < edificacaos.length; i++) {
+        var edificacao = edificacaos[i];
+        var obj = wkt.toObject(wkt.read(edificacao.geom));
+        obj.setStyle({
+          color: '#010189'
+      });
+
+        obj.addTo(map);
+      }  
+     
+</script>
+
+<h2>Edificações<%= link_to '+', new_edificacao_path , class:"btn btn-primary"%></h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @edificacaos.each do |edificacao| %>
+      <tr>
+        <td><%= edificacao.id %></td>
+        <td><%= link_to 'Edit', edit_edificacao_path(edificacao), class:"btn btn-info" %></td>
+        <td><%= link_to 'Destroy', edificacao, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
