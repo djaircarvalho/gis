@@ -1,4 +1,3 @@
-
 <div id="map" class="mapa">
   <%=
     map(:center => {
@@ -7,15 +6,12 @@
     })
   %>
 </div>
+<h1>Editar Ferrovia</h1>
 
-<div class="container">
-  <h1>New Rio</h1>
+<%= render 'form', ferrovium: @ferrovium %>
 
-  <%= render 'form', rio: @rio %>
+<%= link_to 'Back', ferrovia_path, class:"btn btn-default" %>
 
-  <%= link_to 'Back', rios_path ,class:"btn btn-default"%>
-</div>
-  
 <script type="text/javascript">
 	function toWKT(layer) {
       var lng, lat, coords = [];
@@ -66,13 +62,22 @@
           featureGroup: drawnItems
          }
         });
- 
- 		 map.addControl(drawControl);
+      var rio = JSON.parse('<%=escape_javascript @ferrovium.to_json %>'.replace(/&quot;/g,'"'));
+      var wkt = new Wkt.Wkt();
+      var obj = wkt.toObject(wkt.read(rio.geom));
 
-        map.on('draw:created', function (e) {
-            var type = e.layerType,
-                layer = e.layer;
-            drawnItems.addLayer(layer);
-            $('#rio_geom').val(toWKT(layer));
-        });
+      obj.setStyle({
+          color: 'blue'
+      });
+      obj.addTo(drawnItems); 
+ 		  map.addControl(drawControl);
+
+      map.on('draw:created', function (e) {
+          var type = e.layerType,
+              layer = e.layer;
+          drawnItems.addLayer(layer);
+          $('#ferrovium_geom').val(toWKT(layer));
+      });
+
+        
 </script>

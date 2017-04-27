@@ -1,0 +1,62 @@
+
+<div id="map" class="mapa">
+  <%=
+    map(:center => {
+      :latlng => [-5.360528731202039, -42.67536163330079],
+      :zoom => 15
+    });
+  %>
+</div>
+
+<p id="notice"><%= notice %></p>
+
+<h2>Ferrovias
+<%= link_to '+', new_ferrovium_path , class:"btn btn-primary"%>
+</h2>
+<br/>
+<div id='search-box'>
+  <form action='/search' id='search-form' method='get' target='_top'>
+    <input id='search-text' name='q' placeholder='Digite sua pesquisa' type='text'/>
+    <button id='search-button' type='submit'><span>Buscar</span></button>
+  </form>
+</div>
+<br/>
+
+<script type="text/javascript">
+
+   var drawnItems = new L.FeatureGroup();
+   var ferrovia = JSON.parse('<%=escape_javascript @ferrovia.to_json %>'.replace(/&quot;/g,'"'));
+
+        
+     var wkt = new Wkt.Wkt();
+     
+    for (var i = 0; i < ferrovia.length; i++) {
+        var ferrovium = ferrovia[i];
+        var obj = wkt.toObject(wkt.read(ferrovium.geom));
+        
+        obj.addTo(map);
+      }  
+     
+
+</script>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ferrovia.each do |ferrovium| %>
+      <tr>
+        <td><%= ferrovium.id %></td>
+        <td><%= link_to 'Edit', edit_ferrovium_path(ferrovium), class:"btn btn-info" %></td>
+        <td><%= link_to 'Destroy', ferrovium, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

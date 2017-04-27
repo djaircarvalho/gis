@@ -1,0 +1,24 @@
+<%= form_for(ferrovium) do |f| %>
+  <% if ferrovium.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ferrovium.errors.count, "error") %> prohibited this ferrovium from being saved:</h2>
+
+      <ul>
+      <% ferrovium.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :geom , class:"control-label"%>
+    <%= f.text_field :geom , class:"form-control caixa"%>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit 'Save', class:"btn btn-primary" %>
+  </div>
+<% end %>
+
+<br/>

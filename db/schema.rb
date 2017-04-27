@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170427225534) do
+ActiveRecord::Schema.define(version: 20170427230437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,12 @@ ActiveRecord::Schema.define(version: 20170427225534) do
     t.datetime  "created_at",                                                          null: false
     t.datetime  "updated_at",                                                          null: false
     t.string    "descricao"
+  end
+
+  create_table "ferrovia", force: :cascade do |t|
+    t.geography "geom",       limit: {:srid=>4055, :type=>"line_string", :geographic=>true}
+    t.datetime  "created_at",                                                                null: false
+    t.datetime  "updated_at",                                                                null: false
   end
 
   create_table "lagos", force: :cascade do |t|

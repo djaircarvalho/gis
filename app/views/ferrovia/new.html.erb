@@ -8,14 +8,12 @@
   %>
 </div>
 
-<div class="container">
-  <h1>New Rio</h1>
+<h1>Nova Ferrovia</h1>
 
-  <%= render 'form', rio: @rio %>
+<%= render 'form', ferrovium: @ferrovium %>
 
-  <%= link_to 'Back', rios_path ,class:"btn btn-default"%>
-</div>
-  
+<%= link_to 'Back', ferrovia_path, class:"btn btn-default" %>
+
 <script type="text/javascript">
 	function toWKT(layer) {
       var lng, lat, coords = [];
@@ -67,12 +65,12 @@
          }
         });
  
- 		 map.addControl(drawControl);
+ 		    map.addControl(drawControl);
 
         map.on('draw:created', function (e) {
             var type = e.layerType,
                 layer = e.layer;
             drawnItems.addLayer(layer);
-            $('#rio_geom').val(toWKT(layer));
+            $('#ferrovium_geom').val(toWKT(layer));
         });
 </script>

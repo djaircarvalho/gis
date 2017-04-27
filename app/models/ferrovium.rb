@@ -1,0 +1,2 @@
+class Ferrovium < ApplicationRecord
+end
