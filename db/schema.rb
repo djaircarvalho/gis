@@ -17,15 +17,9 @@ ActiveRecord::Schema.define(version: 20170427221740) do
   enable_extension "postgis"
 
   create_table "edificacaos", force: :cascade do |t|
-    t.geography "geom",       limit: {:srid=>4055, :type=>"polygon", :geographic=>true}
-    t.datetime  "created_at",                                                            null: false
-    t.datetime  "updated_at",                                                            null: false
-  end
-
-  create_table "edificacos", force: :cascade do |t|
-    t.polygon  "geom"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.geography "geom",       limit: {:srid=>4055, :type=>"point", :geographic=>true}
+    t.datetime  "created_at",                                                          null: false
+    t.datetime  "updated_at",                                                          null: false
   end
 
   create_table "lagos", force: :cascade do |t|
