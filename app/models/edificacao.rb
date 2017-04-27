@@ -1,0 +1,2 @@
+class Edificacao < ApplicationRecord
+end

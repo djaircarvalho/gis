@@ -3,5 +3,6 @@ class HomeController < ApplicationController
   	@quadras = Quadra.all
   	@rios = Rio.all
   	@logradouros = Logradouro.all
+  	@edificacaos = Edificacao.all
   end
 end
