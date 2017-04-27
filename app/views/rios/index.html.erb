@@ -35,7 +35,6 @@
         var rio = rios[i];
         var obj = wkt.toObject(wkt.read(rio.geom));
         
-        obj.bindPopup(rio.descricao);
         obj.addTo(map);
       }  
      
@@ -47,7 +46,6 @@
   <thead>
     <tr>
       <th>Código</th>
-      <th>Descrição</th>
       <!-- <th>Geom</th> -->
       <th colspan="2" style="text-align: center">Ações</th>
     </tr>
@@ -57,7 +55,6 @@
     <% @rios.each do |rio| %>
       <tr>
         <td><%= rio.id %></td>
-        <td><%= rio.descricao %></td>
         <!-- <td><%= rio.geom %></td> -->
         <td><%= link_to 'Edit', edit_rio_path(rio) , class:"btn btn-info"%></td>
         <td><%= link_to 'Destroy', rio, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
@@ -65,6 +62,5 @@
     <% end %>
   </tbody>
 </table>
-<%= will_paginate @rios, renderer: BootstrapPagination::Rails %>
 <br>
 

@@ -4,7 +4,7 @@ class RiosController < ApplicationController
   # GET /rios
   # GET /rios.json
   def index
-    @rios = Rio.all.paginate(:page => params[:page], :per_page => 5)
+    @rios = Rio.all
   end
 
   # GET /rios/1
@@ -28,8 +28,8 @@ class RiosController < ApplicationController
 
     respond_to do |format|
       if @rio.save
-        format.html { redirect_to @rio, notice: 'Rio was successfully created.' }
-        format.json { render :show, status: :created, location: @rio }
+        format.html { redirect_to rios_path, notice: 'Rio was successfully created.' }
+        format.json { render :index, status: :created, location: @rio }
       else
         format.html { render :new }
         format.json { render json: @rio.errors, status: :unprocessable_entity }
@@ -42,8 +42,8 @@ class RiosController < ApplicationController
   def update
     respond_to do |format|
       if @rio.update(rio_params)
-        format.html { redirect_to @rio, notice: 'Rio was successfully updated.' }
-        format.json { render :show, status: :ok, location: @rio }
+        format.html { redirect_to rios_path, notice: 'Rio was successfully updated.' }
+        format.json { render :index, status: :ok, location: @rio }
       else
         format.html { render :edit }
         format.json { render json: @rio.errors, status: :unprocessable_entity }
@@ -69,6 +69,6 @@ class RiosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rio_params
-      params.require(:rio).permit(:descricao, :geom)
+      params.require(:rio).permit(:geom)
     end
 end
