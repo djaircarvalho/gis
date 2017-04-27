@@ -1,5 +1,17 @@
 <p id="notice"><%= notice %></p>
 
+<script type="text/javascript">
+	var quadra = JSON.parse('<%=escape_javascript @quadra.to_json %>'.replace(/&quot;/g,'"'));
+
+    var wkt = new Wkt.Wkt();
+    var obj = wkt.toObject(wkt.read(quadra.localizacao));
+    obj.bindPopup(quadra.descricao);
+    obj.setStyle({
+	      color: 'green'
+	  });
+    obj.addTo(map);
+</script>
+
 <p>
   <strong>Descricao:</strong>
   <%= @quadra.descricao %>

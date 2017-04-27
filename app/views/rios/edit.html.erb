@@ -63,13 +63,22 @@
           featureGroup: drawnItems
          }
         });
- 
- 		 map.addControl(drawControl);
+      var rio = JSON.parse('<%=escape_javascript @rio.to_json %>'.replace(/&quot;/g,'"'));
+      var wkt = new Wkt.Wkt();
+      var obj = wkt.toObject(wkt.read(rio.geom));
+      obj.bindPopup(rio.descricao);
+      obj.setStyle({
+          color: 'blue'
+      });
+      obj.addTo(drawnItems); 
+ 		  map.addControl(drawControl);
 
-        map.on('draw:created', function (e) {
-            var type = e.layerType,
-                layer = e.layer;
-            drawnItems.addLayer(layer);
-            $('#rio_geom').val(toWKT(layer));
-        });
+      map.on('draw:created', function (e) {
+          var type = e.layerType,
+              layer = e.layer;
+          drawnItems.addLayer(layer);
+          $('#rio_geom').val(toWKT(layer));
+      });
+
+        
 </script>

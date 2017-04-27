@@ -46,11 +46,12 @@
             return "POINT(" + layer.getLatLng().lng + " " + layer.getLatLng().lat + ")";
         }
     };
-	 var drawnItems = new L.FeatureGroup();
-        map.addLayer(drawnItems);
+
+      var drawnItems = new L.FeatureGroup();
+       map.addLayer(drawnItems);
 
         var drawControl = new L.Control.Draw({
-         draw: {
+         draw:{
           polygon: {
            shapeOptions: {
             color: 'purple'
@@ -64,17 +65,25 @@
           featureGroup: drawnItems
          }
         });
+      var quadra = JSON.parse('<%=escape_javascript @quadra.to_json %>'.replace(/&quot;/g,'"'));
+      var wkt = new Wkt.Wkt();
+      var obj = wkt.toObject(wkt.read(quadra.localizacao));
+      obj.bindPopup(quadra.descricao);
+      obj.setStyle({
+          color: 'green'
+      });
+      obj.addTo(drawnItems);
  
  		 map.addControl(drawControl);
 
-        map.on('draw:created', function (e) {
-            var type = e.layerType,
-                layer = e.layer;
-            drawnItems.addLayer(layer);
-            var wkt_string = toWKT(layer);
-            $('#quadra_localizacao').val(wkt_string);
-             var wkt = new Wkt.Wkt();
-            console.log(wkt.read(wkt_string))
-        });
+    map.on('draw:created', function (e) {
+        var type = e.layerType,
+            layer = e.layer;
+        drawnItems.addLayer(layer);
+        var wkt_string = toWKT(layer);
+        $('#quadra_localizacao').val(wkt_string);
+         var wkt = new Wkt.Wkt();
+        console.log(wkt.read(wkt_string))
+    });
 
 </script>

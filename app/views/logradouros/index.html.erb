@@ -1,5 +1,36 @@
 <p id="notice"><%= notice %></p>
 
+<div id="map" class="mapa">
+  <%=
+    map(:center => {
+      :latlng => [-5.360528731202039, -42.67536163330079],
+      :zoom => 18
+    })
+  %>
+</div>
+
+<script type="text/javascript">
+
+   var drawnItems = new L.FeatureGroup();
+   var logradouros = JSON.parse('<%=escape_javascript @logradouros.to_json %>'.replace(/&quot;/g,'"'));
+
+        
+     var wkt = new Wkt.Wkt();
+     
+    for (var i = 0; i < logradouros.length; i++) {
+        var logradouro = logradouros[i];
+        var obj = wkt.toObject(wkt.read(logradouro.localizacao));
+        obj.setStyle({
+          color: 'red'
+      });
+        obj.bindPopup(logradouro.descricao);
+        obj.addTo(map);
+      }  
+     
+</script>
+
+</script>
+
 <h1>Logradouros</h1>
 
 <table>
