@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :rodovia
   resources :pontes
   resources :ferrovia
   resources :lagos

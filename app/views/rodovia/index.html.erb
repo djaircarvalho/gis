@@ -1,0 +1,51 @@
+<div id="map" class="mapa">
+  <%=
+    map(:center => {
+      :latlng => [-5.360528731202039, -42.67536163330079],
+      :zoom => 15
+    });
+  %>
+</div>
+
+<script type="text/javascript">
+
+   var drawnItems = new L.FeatureGroup();
+   var rodovias = JSON.parse('<%=escape_javascript @rodovia.to_json %>'.replace(/&quot;/g,'"'));
+
+        
+     var wkt = new Wkt.Wkt();
+     
+    for (var i = 0; i < rodovias.length; i++) {
+        var rodovia = rodovias[i];
+        var obj = wkt.toObject(wkt.read(rodovia.geom));
+        
+        obj.addTo(map);
+      }  
+</script>
+
+<p id="notice"><%= notice %></p>
+
+<h2>Rodovia
+<%= link_to '+', new_rodovium_path , class:"btn btn-primary"%>
+</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rodovia.each do |rodovium| %>
+      <tr>
+        <td><%= rodovium.id %></td>
+        <td><%= link_to 'Edit', edit_rodovium_path(rodovium), class:"btn btn-info" %></td>
+        <td><%= link_to 'Destroy', rodovium, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

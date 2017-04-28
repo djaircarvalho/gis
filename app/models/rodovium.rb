@@ -1,0 +1,2 @@
+class Rodovium < ApplicationRecord
+end
