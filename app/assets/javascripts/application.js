@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require leaflet
+//= require leaflet.easyPrint.js
 //= require leaflet.draw
 //= require turbolinks
 //= require_tree .

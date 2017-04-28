@@ -23,6 +23,12 @@
         obj.bindPopup(edificacao.descricao);
         obj.addTo(map);
       }  
+
+      L.easyPrint({
+        title: 'Imprimir',
+        position: 'bottomright',
+        elementsToHide: 'a, table,tr,td,th, #search-box'
+      }).addTo(map);    
      
 </script>
 
