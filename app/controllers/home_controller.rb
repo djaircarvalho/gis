@@ -6,5 +6,6 @@ class HomeController < ApplicationController
   	@edificacaos = Edificacao.all
   	@lagos = Lago.all
   	@ferrovia = Ferrovium.all
+  	@pontes = Ponte.all
   end
 end

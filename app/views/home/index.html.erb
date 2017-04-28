@@ -70,7 +70,8 @@
       });
         obj.addTo(map);
       }   
-     var ferrovia = JSON.parse('<%=escape_javascript @ferrovia.to_json %>'.replace(/&quot;/g,'"'));
+    
+    var ferrovia = JSON.parse('<%=escape_javascript @ferrovia.to_json %>'.replace(/&quot;/g,'"'));
 
     for (var i = 0; i < ferrovia.length; i++) {
         var ferrovium = ferrovia[i];
@@ -78,7 +79,15 @@
         
         obj.addTo(map);
       }  
+    
+    var pontes = JSON.parse('<%=escape_javascript @pontes.to_json %>'.replace(/&quot;/g,'"'));
      
+    for (var i = 0; i < pontes.length; i++) {
+        var ponte = pontes[i];
+        var obj = wkt.toObject(wkt.read(ponte.geom));
+        
+        obj.addTo(map);
+    }
 
 </script>
 
@@ -128,6 +137,11 @@
         <td>Ferrovias</td>
         <td><%= link_to 'Detalhes', ferrovia_path, class:""%></td>
         <td><%= link_to 'Adicionar', new_ferrovium_path, class:""%></td>
+      </tr>
+      <tr>
+        <td>Pontes</td>
+        <td><%= link_to 'Detalhes', pontes_path, class:""%></td>
+        <td><%= link_to 'Adicionar', new_ponte_path, class:""%></td>
       </tr>
 		</tbody>
 	</table>

@@ -1,0 +1,76 @@
+
+<div id="map" class="mapa">
+  <%=
+    map(:center => {
+      :latlng => [-5.360528731202039, -42.67536163330079],
+      :zoom => 16
+    })
+  %>
+</div>
+
+<h1>New Ponte</h1>
+
+<%= render 'form', ponte: @ponte %>
+
+<%= link_to 'Back', pontes_path, class:"btn btn-default" %>
+
+<script type="text/javascript">
+	function toWKT(layer) {
+      var lng, lat, coords = [];
+      if (layer instanceof L.Polygon) {
+          var latlngs = layer.getLatLngs();
+          for (var i = 0; i < latlngs[0].length; i++) {
+              coords.push(latlngs[0][i].lng + " " + latlngs[0][i].lat);
+              if (i === 0) {
+                lng = latlngs[0][i].lng;
+                lat = latlngs[0][i].lat;
+              }
+             
+          }
+          
+        return "POLYGON((" + coords.join(",") + "," + lng + " " + lat + "))";
+          
+        }else if (layer instanceof L.Polyline) {
+          var latlngs = layer.getLatLngs();
+          for (var i = 0; i < latlngs.length; i++) {
+            coords.push(latlngs[i].lng + " " + latlngs[i].lat);
+              if (i === 0) {
+                lng = latlngs[i].lng;
+                lat = latlngs[i].lat;
+              }
+          }
+              return "LINESTRING(" + coords.join(",") + ")";
+        }
+         else if (layer instanceof L.Marker) {
+            return "POINT(" + layer.getLatLng().lng + " " + layer.getLatLng().lat + ")";
+        }
+    };
+	 var drawnItems = new L.FeatureGroup();
+        map.addLayer(drawnItems);
+
+        var drawControl = new L.Control.Draw({
+         draw: {
+          polygon: false,
+          polyline: {
+           shapeOptions: {
+            color: 'red'
+           },
+          },
+          rectangle: false,
+          circle: false,
+          marker:false
+         },
+         edit: {
+          featureGroup: drawnItems
+         }
+        });
+ 
+ 		    map.addControl(drawControl);
+
+        map.on('draw:created', function (e) {
+            var type = e.layerType,
+                layer = e.layer;
+            drawnItems.addLayer(layer);
+            $('#ponte_geom').val(toWKT(layer));
+        });
+</script>

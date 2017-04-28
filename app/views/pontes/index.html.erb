@@ -1,0 +1,62 @@
+<div id="map" class="mapa">
+  <%=
+    map(:center => {
+      :latlng => [-5.360528731202039, -42.67536163330079],
+      :zoom => 15
+    });
+  %>
+</div>
+
+<p id="notice"><%= notice %></p>
+
+<h2>Pontes
+<%= link_to '+', new_ponte_path , class:"btn btn-primary"%>
+</h2>
+<br/>
+<div id='search-box'>
+  <form action='/search' id='search-form' method='get' target='_top'>
+    <input id='search-text' name='q' placeholder='Digite sua pesquisa' type='text'/>
+    <button id='search-button' type='submit'><span>Buscar</span></button>
+  </form>
+</div>
+<br/>
+
+<script type="text/javascript">
+
+   var drawnItems = new L.FeatureGroup();
+   var pontes = JSON.parse('<%=escape_javascript @pontes.to_json %>'.replace(/&quot;/g,'"'));
+
+        
+     var wkt = new Wkt.Wkt();
+     
+    for (var i = 0; i < pontes.length; i++) {
+        var ponte = pontes[i];
+        var obj = wkt.toObject(wkt.read(ponte.geom));
+        
+        obj.addTo(map);
+      }  
+     
+
+</script>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Código
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pontes.each do |ponte| %>
+      <tr>
+        <td><%= ponte.id %></td>
+        <td><%= link_to 'Edit', edit_ponte_path(ponte), class:"btn btn-info" %></td>
+        <td><%= link_to 'Destroy', ponte, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
