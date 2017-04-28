@@ -1,0 +1,59 @@
+<div id="map" class="mapa">
+  <%=
+    map(:center => {
+      :latlng => [-5.360528731202039, -42.67536163330079],
+      :zoom => 15
+    });
+  %>
+</div>
+
+<p id="notice"><%= notice %></p>
+
+<h2>Estradas
+<%= link_to '+', new_estrada_path , class:"btn btn-primary"%>
+</h2>
+<br/>
+<div id='search-box'>
+  <form action='/search' id='search-form' method='get' target='_top'>
+    <input id='search-text' name='q' placeholder='Digite sua pesquisa' type='text'/>
+    <button id='search-button' type='submit'><span>Buscar</span></button>
+  </form>
+</div>
+<br/>
+
+<script type="text/javascript">
+
+   var drawnItems = new L.FeatureGroup();
+   var estradas = JSON.parse('<%=escape_javascript @estradas.to_json %>'.replace(/&quot;/g,'"'));
+
+        
+     var wkt = new Wkt.Wkt();
+     
+    for (var i = 0; i < estradas.length; i++) {
+        var estrada = estradas[i];
+        var obj = wkt.toObject(wkt.read(estrada.geom));
+        
+        obj.addTo(map);
+      }  
+</script>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @estradas.each do |estrada| %>
+      <tr>
+        <td><%= estrada.id %></td>
+        <td><%= link_to 'Edit', edit_estrada_path(estrada), class:"btn btn-info" %></td>
+        <td><%= link_to 'Destroy', estrada, method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-danger"%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

@@ -96,7 +96,15 @@
         var obj = wkt.toObject(wkt.read(rodovia.geom));
         
         obj.addTo(map);
-      }  
+      }
+    var estradas = JSON.parse('<%=escape_javascript @estradas.to_json %>'.replace(/&quot;/g,'"'));
+     
+    for (var i = 0; i < estradas.length; i++) {
+        var estrada = estradas[i];
+        var obj = wkt.toObject(wkt.read(estrada.geom));
+        
+        obj.addTo(map);
+      }    
 
 </script>
 
@@ -156,6 +164,11 @@
         <td>Rodovias</td>
         <td><%= link_to 'Detalhes', rodovia_path, class:""%></td>
         <td><%= link_to 'Adicionar', new_rodovium_path, class:""%></td>
+      </tr>
+      <tr>
+        <td>Estradas</td>
+        <td><%= link_to 'Detalhes', estradas_path, class:""%></td>
+        <td><%= link_to 'Adicionar', new_estrada_path, class:""%></td>
       </tr>
 		</tbody>
 	</table>

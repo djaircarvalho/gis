@@ -1,0 +1,2 @@
+class Estrada < ApplicationRecord
+end

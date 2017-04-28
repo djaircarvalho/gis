@@ -8,5 +8,6 @@ class HomeController < ApplicationController
   	@ferrovia = Ferrovium.all
   	@pontes = Ponte.all
   	@rodovia = Rodovium.all
+    @estradas = Estrada.all
   end
 end
