@@ -43,9 +43,9 @@ ActiveRecord::Schema.define(version: 20170428200857) do
 
   create_table "logradouros", force: :cascade do |t|
     t.string    "descricao"
-    t.geography "localizacao", limit: {:srid=>4055, :type=>"polygon", :geographic=>true}
-    t.datetime  "created_at",                                                             null: false
-    t.datetime  "updated_at",                                                             null: false
+    t.geography "localizacao", limit: {:srid=>4055, :type=>"line_string", :geographic=>true}
+    t.datetime  "created_at",                                                                 null: false
+    t.datetime  "updated_at",                                                                 null: false
   end
 
   create_table "pontes", force: :cascade do |t|

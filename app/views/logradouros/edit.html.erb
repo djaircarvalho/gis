@@ -45,14 +45,15 @@
 	 var drawnItems = new L.FeatureGroup();
         map.addLayer(drawnItems);
 
-        var drawControl = new L.Control.Draw({
+         var drawControl = new L.Control.Draw({
          draw: {
-          polygon: {
+          polygon: false,
+          polyline: {
            shapeOptions: {
-            color: 'purple'
+            color: 'red'
            },
           },
-          polyline: false,
+          rectangle:false,
           circle: false,
           marker: false
          },
