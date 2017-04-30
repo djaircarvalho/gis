@@ -4,7 +4,18 @@ class LagosController < ApplicationController
   # GET /lagos
   # GET /lagos.json
   def index
-    @lagos = Lago.all
+    if params[:q] and !params[:q].empty?
+      query = params[:q]
+      @lagos = Lago.where("descricao LIKE ? ", "%#{query}%")
+      if @lagos.empty?
+        @lagos = Lago.all
+        flash[:error] = 'Nenhum logo encontrado.'
+      else
+        flash[:error] = '';
+      end
+    else 
+      @lagos = Lago.all
+    end
   end
 
   # GET /lagos/1
@@ -28,7 +39,7 @@ class LagosController < ApplicationController
 
     respond_to do |format|
       if @lago.save
-        format.html { redirect_to @lago, notice: 'Lago was successfully created.' }
+        format.html { redirect_to lagos_url, notice: 'Lago was successfully created.' }
         format.json { render :show, status: :created, location: @lago }
       else
         format.html { render :new }
@@ -42,7 +53,7 @@ class LagosController < ApplicationController
   def update
     respond_to do |format|
       if @lago.update(lago_params)
-        format.html { redirect_to @lago, notice: 'Lago was successfully updated.' }
+        format.html { redirect_to lagos_url, notice: 'Lago was successfully updated.' }
         format.json { render :show, status: :ok, location: @lago }
       else
         format.html { render :edit }
@@ -69,6 +80,6 @@ class LagosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lago_params
-      params.require(:lago).permit(:geom)
+      params.require(:lago).permit(:descricao, :geom)
     end
 end

@@ -30,17 +30,38 @@
         elementsToHide: 'a, table,tr,td,th, #search-box'
       }).addTo(map);         
 </script>
-<p id="notice"><%= notice %></p>
+<% if notice.present?%>
+<div id="notice" class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong><%= notice %></strong>
+</div>
+<% end %>
+
+<% if flash_message.present?%>
+<div id="notice" class="alert alert-danger alert-dismissible alerta" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong><%= flash_message %></strong>
+</div>
+<% end %>
 
 <h2>Lagos
-<%= link_to '+', new_lago_path , class:"btn btn-primary"%>
+<%= link_to 'Adicionar', new_lago_path , class:"btn btn-primary adicionar"%>
 </h2>
+<br/>
+<div class='search-box'>
+  <form id='search-form' class='search-form' method='get' target='_top' >
+    <input id='q' class='search-text' name='q' placeholder='Digite sua pesquisa' type='text' value='<%= params[:q]%>'/>
+    <button id='search-button' class='search-button' type='submit'><span>Buscar</span></button>
+  </form>
+</div>
+<br/>
 
 <table class="table">
   <thead>
     <tr>
       <th>Código</th>
-      <th colspan="3"></th>
+      <th>Descrição</th>
+      <th colspan="2" style="text-align: center">Ações</th>
     </tr>
   </thead>
 
@@ -48,8 +69,9 @@
     <% @lagos.each do |lago| %>
       <tr>
         <td><%= lago.id %></td>
-        <td><%= link_to 'Edit', edit_lago_path(lago) , class:"btn btn-info"%></td>
-        <td><%= link_to 'Destroy', lago, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
+        <td><%= lago.descricao %></td>
+        <td><%= link_to 'Editar', edit_lago_path(lago) , class:"btn btn-info"%></td>
+        <td><%= link_to 'Deletar', lago, method: :delete, data: { confirm: 'Deseja deletar?' }, class:"btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
