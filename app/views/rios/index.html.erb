@@ -8,16 +8,20 @@
   %>
 </div>
 
-<p id="notice"><%= notice %></p>
-
+<% if notice.present?%>
+<div id="notice" class="alert alert-success alert-dismissible alerta" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong><%= notice %></strong>
+</div>
+<% end %>
 <h2>Rios
-<%= link_to '+', new_rio_path , class:"btn btn-primary"%>
+<%= link_to 'Adicionar', new_rio_path , class:"btn btn-primary adicionar"%>
 </h2>
 <br/>
-<div id='search-box'>
-  <form action='/search' id='search-form' method='get' target='_top'>
-    <input id='search-text' name='q' placeholder='Digite sua pesquisa' type='text'/>
-    <button id='search-button' type='submit'><span>Buscar</span></button>
+<div class='search-box'>
+  <form class='search-form' method='get' target='_top'>
+    <input class='search-text' id='q' name='q' placeholder='Digite sua pesquisa' type='text' value="<%= params[:q] %>" />
+    <button class='search-button' type='submit'><span>Buscar</span></button>
   </form>
 </div>
 <br/>
@@ -51,7 +55,7 @@
   <thead>
     <tr>
       <th>Código</th>
-      <!-- <th>Geom</th> -->
+      <th>Descrição</th>
       <th colspan="2" style="text-align: center">Ações</th>
     </tr>
   </thead>
@@ -60,9 +64,9 @@
     <% @rios.each do |rio| %>
       <tr>
         <td><%= rio.id %></td>
-        <!-- <td><%= rio.geom %></td> -->
-        <td><%= link_to 'Edit', edit_rio_path(rio) , class:"btn btn-info"%></td>
-        <td><%= link_to 'Destroy', rio, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
+        <td><%= rio.descricao %></td> 
+        <td><%= link_to 'Editar', edit_rio_path(rio) , class:"btn btn-info"%></td>
+        <td><%= link_to 'Deletar', rio, method: :delete, data: { confirm: 'Deseja deletar?' }, class:"btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>

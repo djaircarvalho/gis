@@ -4,7 +4,12 @@ class RiosController < ApplicationController
   # GET /rios
   # GET /rios.json
   def index
-    @rios = Rio.all
+    if params[:q] and !params[:q].empty?
+      query = params[:q]
+      @rios = Rio.where("descricao LIKE ? ", "%#{query}%")
+    else 
+      @rios = Rio.all
+    end
   end
 
   # GET /rios/1
@@ -28,7 +33,7 @@ class RiosController < ApplicationController
 
     respond_to do |format|
       if @rio.save
-        format.html { redirect_to rios_path, notice: 'Rio was successfully created.' }
+        format.html { redirect_to rios_url, notice: 'Rio criado com sucesso.' }
         format.json { render :index, status: :created, location: @rio }
       else
         format.html { render :new }
@@ -42,7 +47,7 @@ class RiosController < ApplicationController
   def update
     respond_to do |format|
       if @rio.update(rio_params)
-        format.html { redirect_to rios_path, notice: 'Rio was successfully updated.' }
+        format.html { redirect_to rios_url, notice: 'Rio alterado com sucesso.' }
         format.json { render :index, status: :ok, location: @rio }
       else
         format.html { render :edit }
@@ -56,7 +61,7 @@ class RiosController < ApplicationController
   def destroy
     @rio.destroy
     respond_to do |format|
-      format.html { redirect_to rios_url, notice: 'Rio was successfully destroyed.' }
+      format.html { redirect_to rios_url, notice: 'Rio deletado com sucesso.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +74,6 @@ class RiosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rio_params
-      params.require(:rio).permit(:geom)
+      params.require(:rio).permit(:descricao, :geom)
     end
 end
