@@ -18,7 +18,11 @@
     for (var i = 0; i < rodovias.length; i++) {
         var rodovia = rodovias[i];
         var obj = wkt.toObject(wkt.read(rodovia.geom));
-        
+        obj.setStyle({
+          color:'#696c70',
+          dashArray: '20,15',
+          lineJoin: 'round'
+        });        
         obj.addTo(map);
       }  
       L.easyPrint({
