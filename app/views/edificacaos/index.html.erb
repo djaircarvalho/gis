@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <div id="map" class="mapa">
   <%=
     map(:center => {
@@ -31,22 +29,36 @@
       }).addTo(map);    
      
 </script>
-
-<h2>Edificações<%= link_to '+', new_edificacao_path , class:"btn btn-primary"%></h2>
-
-
-<%= form_for :edificacaos, method: :get do |f| %>
-  <%= label_tag(:q, "Buscar:") %>
-  <%= text_field_tag(:q) %>
-  <%= submit_tag("Submeter") %>
+<% if notice.present?%>
+<div id="notice" class="alert alert-success alert-dismissible alerta" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong><%= notice %></strong>
+</div>
 <% end %>
+
+<% if flash_message.present?%>
+<div id="notice" class="alert alert-danger alert-dismissible alerta" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong><%= flash_message %></strong>
+</div>
+<% end %>
+
+<h2>Edificações<%= link_to 'Adicionar', new_edificacao_path , class:"btn btn-primary adicionar"%></h2>
+<br/>
+<div class='search-box'>
+  <form id='search-form' class='search-form' method='get' target='_top' >
+    <input id='q' class='search-text' name='q' placeholder='Digite sua pesquisa' type='text' value='<%= params[:q]%>'/>
+    <button id='search-button' class='search-button' type='submit'><span>Buscar</span></button>
+  </form>
+</div>
+<br/>
 
 <table class="table">
   <thead>
     <tr>
       <th>Código</th>
       <th>Descrição</th>
-      <th colspan="3"></th>
+      <th colspan="2" style="text-align: center">Ações</th>
     </tr>
   </thead>
 
@@ -55,11 +67,9 @@
       <tr>
         <td><%= edificacao.id %></td>
         <td><%= edificacao.descricao %></td>
-        <td><%= link_to 'Edit', edit_edificacao_path(edificacao), class:"btn btn-info" %></td>
-        <td><%= link_to 'Destroy', edificacao, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
+        <td><%= link_to 'Editar', edit_edificacao_path(edificacao), class:"btn btn-info" %></td>
+        <td><%= link_to 'Deletar', edificacao, method: :delete, data: { confirm: 'Deseja deletar?' }, class:"btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>

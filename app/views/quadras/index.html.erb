@@ -12,6 +12,13 @@
   <strong><%= notice %></strong>
 </div>
 <% end %>
+
+<% if flash_message.present?%>
+<div id="notice" class="alert alert-danger alert-dismissible alerta" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong><%= flash_message %></strong>
+</div>
+<% end %>
 <script type="text/javascript">
 
    var drawnItems = new L.FeatureGroup();
@@ -54,7 +61,6 @@
     <tr>
       <th>Código</th>
       <th>Descrição</th>
-      <!-- <th>Localização</th> -->
       <th colspan="2" style="text-align: center">Ações</th>
     </tr>
   </thead>
@@ -64,7 +70,6 @@
       <tr>
         <td><%= quadra.id %></td>
         <td><%= quadra.descricao %></td>
-        <!-- <td><%= quadra.localizacao %></td> -->
         <td><%= link_to 'Editar', edit_quadra_path(quadra), class:"btn btn-info" %></td>
         <td><%= link_to 'Deletar', quadra, method: :delete, data: { confirm: 'Deseja realmente deletar?' }, class:"btn btn-danger" %></td>
       </tr>

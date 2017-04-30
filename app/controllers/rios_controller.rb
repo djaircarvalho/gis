@@ -7,6 +7,12 @@ class RiosController < ApplicationController
     if params[:q] and !params[:q].empty?
       query = params[:q]
       @rios = Rio.where("descricao LIKE ? ", "%#{query}%")
+      if @rios.empty?
+        @rios = Rio.all
+        flash[:error] = 'Nenhum rio encontrado.'
+      else
+        flash[:error] = '';
+      end
     else 
       @rios = Rio.all
     end

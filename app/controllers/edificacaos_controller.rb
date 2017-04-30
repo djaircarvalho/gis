@@ -8,6 +8,12 @@ class EdificacaosController < ApplicationController
     if params[:q] and !params[:q].empty?
       query = params[:q]
       @edificacaos = Edificacao.where("descricao LIKE ? ", "%#{query}%")
+      if @edificacaos.empty?
+        @edificacaos = Edificacao.all
+        flash[:error] = 'Nenhuma edificação encontrada.'
+      else
+        flash[:error] = '';
+      end
     else 
       @edificacaos = Edificacao.all
     end
@@ -34,7 +40,7 @@ class EdificacaosController < ApplicationController
 
     respond_to do |format|
       if @edificacao.save
-        format.html { redirect_to @edificacao, notice: 'Edificacao was successfully created.' }
+        format.html { redirect_to edificacaos_url, notice: 'Edificação criada com sucesso.' }
         format.json { render :show, status: :created, location: @edificacao }
       else
         format.html { render :new }
@@ -48,7 +54,7 @@ class EdificacaosController < ApplicationController
   def update
     respond_to do |format|
       if @edificacao.update(edificacao_params)
-        format.html { redirect_to @edificacao, notice: 'Edificacao was successfully updated.' }
+        format.html { redirect_to edificacaos_url, notice: 'Edificacao atualizada com sucesso.' }
         format.json { render :show, status: :ok, location: @edificacao }
       else
         format.html { render :edit }
@@ -62,7 +68,7 @@ class EdificacaosController < ApplicationController
   def destroy
     @edificacao.destroy
     respond_to do |format|
-      format.html { redirect_to edificacaos_url, notice: 'Edificacao was successfully destroyed.' }
+      format.html { redirect_to edificacaos_url, notice: 'Edificacao deletada com sucesso.' }
       format.json { head :no_content }
     end
   end

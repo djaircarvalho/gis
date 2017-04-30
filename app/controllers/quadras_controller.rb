@@ -7,6 +7,12 @@ class QuadrasController < ApplicationController
      if params[:q] and !params[:q].empty?
       query = params[:q]
       @quadras = Quadra.where("descricao LIKE ? ", "%#{query}%")
+      if @quadras.empty?
+        @quadras = Quadra.all
+        flash[:error] = 'Nenhuma quadra encontrada.'
+      else
+        flash[:error] = '';
+      end
     else 
       @quadras = Quadra.all
     end

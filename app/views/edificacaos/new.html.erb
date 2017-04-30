@@ -2,15 +2,15 @@
   <%=
     map(:center => {
       :latlng => [-5.360528731202039, -42.67536163330079],
-      :zoom => 18
+      :zoom => 16
     })
   %>
 </div>
-<h2>Adicionar Edificação</h2>
+<h2>Nova Edificação</h2>
 
 <%= render 'form', edificacao: @edificacao %>
 
-<%= link_to 'Back', edificacaos_path, class:"btn btn-default" %>
+<%= link_to 'Voltar', edificacaos_path, class:"btn btn-default" %>
 
 <script type="text/javascript">
 
