@@ -4,7 +4,13 @@ class EdificacaosController < ApplicationController
   # GET /edificacaos
   # GET /edificacaos.json
   def index
-    @edificacaos = Edificacao.all
+    byebug
+    if params[:q] and !params[:q].empty?
+      query = params[:q]
+      @edificacaos = Edificacao.where("descricao LIKE ? ", "%#{query}%")
+    else 
+      @edificacaos = Edificacao.all
+    end
   end
 
   # GET /edificacaos/1

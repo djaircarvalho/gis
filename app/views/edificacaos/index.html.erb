@@ -34,6 +34,13 @@
 
 <h2>Edificações<%= link_to '+', new_edificacao_path , class:"btn btn-primary"%></h2>
 
+
+<%= form_for :edificacaos, method: :get do |f| %>
+  <%= label_tag(:q, "Buscar:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Submeter") %>
+<% end %>
+
 <table class="table">
   <thead>
     <tr>
