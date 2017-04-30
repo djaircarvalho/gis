@@ -4,7 +4,13 @@ class FerroviaController < ApplicationController
   # GET /ferrovia
   # GET /ferrovia.json
   def index
-    @ferrovia = Ferrovium.all
+    if params[:q] and !params[:q].empty?
+      query = params[:q]
+      @ferrovia = Ferrovium.where("descricao LIKE ? ", "%#{query}%")
+    else 
+       @ferrovia = Ferrovium.all
+    end
+   
   end
 
   # GET /ferrovia/1

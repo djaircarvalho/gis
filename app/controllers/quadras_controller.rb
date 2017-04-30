@@ -4,7 +4,12 @@ class QuadrasController < ApplicationController
   # GET /quadras
   # GET /quadras.json
   def index
-    @quadras = Quadra.all.paginate(:page => params[:page], :per_page => 5)
+     if params[:q] and !params[:q].empty?
+      query = params[:q]
+      @quadras = Quadra.where("descricao LIKE ? ", "%#{query}%")
+    else 
+      @quadras = Quadra.all
+    end
   end
 
   # GET /quadras/1
@@ -27,7 +32,7 @@ class QuadrasController < ApplicationController
     @quadra = Quadra.new(quadra_params)
     respond_to do |format|
       if @quadra.save
-        format.html { redirect_to @quadra, notice: 'Quadra was successfully created.' }
+        format.html { redirect_to quadras_url, notice: 'Quadra criada com sucesso.' }
         format.json { render :show, status: :created, location: @quadra }
       else
         format.html { render :new }
@@ -41,7 +46,7 @@ class QuadrasController < ApplicationController
   def update
     respond_to do |format|
       if @quadra.update(quadra_params)
-        format.html { redirect_to @quadra, notice: 'Quadra was successfully updated.' }
+        format.html { redirect_to quadras_url, notice: 'Quadra atualizada com sucesso.' }
         format.json { render :show, status: :ok, location: @quadra }
       else
         format.html { render :edit }
@@ -55,7 +60,7 @@ class QuadrasController < ApplicationController
   def destroy
     @quadra.destroy
     respond_to do |format|
-      format.html { redirect_to quadras_url, notice: 'Quadra was successfully destroyed.' }
+      format.html { redirect_to quadras_url, notice: 'Quadra deletada com sucesso.' }
       format.json { head :no_content }
     end
   end

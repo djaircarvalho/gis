@@ -14,10 +14,10 @@
 <%= link_to '+', new_ferrovium_path , class:"btn btn-primary"%>
 </h2>
 <br/>
-<div id='search-box'>
-  <form action='/search' id='search-form' method='get' target='_top'>
-    <input id='search-text' name='q' placeholder='Digite sua pesquisa' type='text'/>
-    <button id='search-button' type='submit'><span>Buscar</span></button>
+<div class='search-box'>
+  <form class='search-form' method='get' target='_top' id="search-form">
+    <input class='search-text' id='q' name='q' placeholder='Digite sua pesquisa' type='text'/>
+    <button class='search-button' id="submit" type='submit'><span>Buscar</span></button>
   </form>
 </div>
 <br/>

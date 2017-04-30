@@ -2,15 +2,15 @@
   <%=
     map(:center => {
       :latlng => [-5.360528731202039, -42.67536163330079],
-      :zoom => 18
+      :zoom => 16
     })
   %>
 </div>
 
-<h1>New Quadra</h1>
+<h1>Nova Quadra</h1>
 <%= render 'form', quadra: @quadra %>
 
-<%= link_to 'Back', quadras_path , class:"btn btn-default"%>
+<%= link_to 'Voltar', quadras_path , class:"btn btn-default"%>
 
 
 <script type="text/javascript">
