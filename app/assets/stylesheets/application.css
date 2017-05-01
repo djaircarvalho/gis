@@ -22,16 +22,18 @@
 	max-height: 800px;
 	float: left;
 
-	padding: 10px;
-	margin: 10px;
-}
-
-.conteudo{
-
 	padding: 5px;
-
+	margin: 5px;
+    margin-right: 15px;
 }
 
+#map{
+    height: 600px;
+}
+.conteudo{
+    margin-top: -12px;
+    margin-right: 10px;
+}
 .titulo:hover{
 	text-decoration: underline;
 	cursor: pointer;

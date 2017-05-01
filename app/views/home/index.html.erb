@@ -1,3 +1,4 @@
+<br/>
 <div id="map" class="mapa">
   <%=
     map(:center => {
@@ -6,15 +7,13 @@
     })
   %>
 </div>
-<br>
 
 <script type="text/javascript">
 
-   
-   var quadras = JSON.parse('<%=escape_javascript @quadras.to_json %>'.replace(/&quot;/g,'"'));
+    var quadras = JSON.parse('<%=escape_javascript @quadras.to_json %>'.replace(/&quot;/g,'"'));
 
         
-     var wkt = new Wkt.Wkt();
+    var wkt = new Wkt.Wkt();
      
     for (var i = 0; i < quadras.length; i++) {
         var quadra = quadras[i];
@@ -130,14 +129,6 @@
     }).addTo(map);    
 
 </script>
-
-
-<div class='search-box'>
-  <form action='/search' class='search-form' method='get' target='_top'>
-    <input class='search-text' name='q' placeholder='Digite sua pesquisa' type='text'/>
-    <button class='search-button' type='submit'><span>Buscar</span></button>
-  </form>
-</div>
 
 <div class="layers">
 
