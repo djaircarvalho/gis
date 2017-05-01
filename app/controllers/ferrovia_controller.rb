@@ -7,7 +7,14 @@ class FerroviaController < ApplicationController
     if params[:q] and !params[:q].empty?
       query = params[:q]
       @ferrovia = Ferrovium.where("descricao LIKE ? ", "%#{query}%")
+      if @ferrovia.empty?
+        @ferrovia = Ferrovium.all
+        flash[:info] = 'Nenhuma ferrovia encontrada.'
+      else
+        flash[:info] = '';
+      end
     else 
+       flash[:error] = '';
        @ferrovia = Ferrovium.all
     end
    
@@ -34,7 +41,7 @@ class FerroviaController < ApplicationController
 
     respond_to do |format|
       if @ferrovium.save
-        format.html { redirect_to @ferrovium, notice: 'Ferrovium was successfully created.' }
+        format.html { redirect_to ferrovia_url, notice: 'Ferrovia criada com sucesso.' }
         format.json { render :show, status: :created, location: @ferrovium }
       else
         format.html { render :new }
@@ -48,7 +55,7 @@ class FerroviaController < ApplicationController
   def update
     respond_to do |format|
       if @ferrovium.update(ferrovium_params)
-        format.html { redirect_to @ferrovium, notice: 'Ferrovium was successfully updated.' }
+        format.html { redirect_to ferrovia_url, notice: 'Ferrovia atualizada com sucesso.' }
         format.json { render :show, status: :ok, location: @ferrovium }
       else
         format.html { render :edit }
@@ -62,7 +69,7 @@ class FerroviaController < ApplicationController
   def destroy
     @ferrovium.destroy
     respond_to do |format|
-      format.html { redirect_to ferrovia_url, notice: 'Ferrovium was successfully destroyed.' }
+      format.html { redirect_to ferrovia_url, notice: 'Ferrovia deletada com sucesso.' }
       format.json { head :no_content }
     end
   end
@@ -75,6 +82,6 @@ class FerroviaController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ferrovium_params
-      params.require(:ferrovium).permit(:geom)
+      params.require(:ferrovium).permit(:descricao, :geom)
     end
 end

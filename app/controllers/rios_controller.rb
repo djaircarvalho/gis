@@ -15,6 +15,7 @@ class RiosController < ApplicationController
       end
     else 
       @rios = Rio.all
+      flash[:error] = ''
     end
   end
 

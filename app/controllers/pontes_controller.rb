@@ -4,7 +4,19 @@ class PontesController < ApplicationController
   # GET /pontes
   # GET /pontes.json
   def index
-    @pontes = Ponte.all
+    if params[:q] and !params[:q].empty?
+      query = params[:q]
+      @pontes = Ponte.where("descricao LIKE ? ", "%#{query}%")
+      if @pontes.empty?
+        @pontes = Ponte.all
+        flash[:error] = 'Nenhuma ponte encontrada.'
+      else
+        flash[:error] = '';
+      end
+    else 
+      @pontes = Ponte.all
+      flash[:error] = ''
+    end
   end
 
   # GET /pontes/1
@@ -28,7 +40,7 @@ class PontesController < ApplicationController
 
     respond_to do |format|
       if @ponte.save
-        format.html { redirect_to @ponte, notice: 'Ponte was successfully created.' }
+        format.html { redirect_to pontes_url, notice: 'Ponte criada com sucesso.' }
         format.json { render :show, status: :created, location: @ponte }
       else
         format.html { render :new }
@@ -42,7 +54,7 @@ class PontesController < ApplicationController
   def update
     respond_to do |format|
       if @ponte.update(ponte_params)
-        format.html { redirect_to @ponte, notice: 'Ponte was successfully updated.' }
+        format.html { redirect_to pontes_url, notice: 'Ponte atualizada com sucesso.' }
         format.json { render :show, status: :ok, location: @ponte }
       else
         format.html { render :edit }
@@ -56,7 +68,7 @@ class PontesController < ApplicationController
   def destroy
     @ponte.destroy
     respond_to do |format|
-      format.html { redirect_to pontes_url, notice: 'Ponte was successfully destroyed.' }
+      format.html { redirect_to pontes_url, notice: 'Ponte deletada com sucesso.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +81,6 @@ class PontesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ponte_params
-      params.require(:ponte).permit(:geom)
+      params.require(:ponte).permit(:descricao, :geom)
     end
 end
