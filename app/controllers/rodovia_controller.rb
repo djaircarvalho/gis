@@ -9,7 +9,7 @@ class RodoviaController < ApplicationController
       @rodovia = Rodovium.where("descricao LIKE ? ", "%#{query}%")
       if @rodovia.empty?
         @rodovia = Rodovium.all
-        flash[:info] = 'Nenhuma ferrovia encontrada.'
+        flash[:info] = 'Nenhuma rodovia encontrada.'
       else
         flash[:info] = '';
       end

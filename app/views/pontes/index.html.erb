@@ -44,6 +44,8 @@
     for (var i = 0; i < pontes.length; i++) {
         var ponte = pontes[i];
         var obj = wkt.toObject(wkt.read(ponte.geom));
+        obj.bindPopup(ponte.descricao);
+
         obj.setStyle({
           color: "yellow"
         });
