@@ -12,10 +12,11 @@ class EdificacaosController < ApplicationController
         @edificacaos = Edificacao.all
         flash[:error] = 'Nenhuma edificação encontrada.'
       else
-        flash[:error] = '';
+        flash[:error] = ''
       end
     else 
       @edificacaos = Edificacao.all
+      flash[:error] = ''
     end
   end
 
