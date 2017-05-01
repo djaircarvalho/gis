@@ -2,7 +2,7 @@
   <%=
     map(:center => {
       :latlng => [-5.360528731202039, -42.67536163330079],
-      :zoom => 15
+      :zoom => 16
     });
   %>
 </div>
@@ -33,17 +33,38 @@
 
 </script>
 
-<p id="notice"><%= notice %></p>
+<% if notice.present?%>
+<div id="notice" class="alert alert-success alert-dismissible alerta" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong><%= notice %></strong>
+</div>
+<% end %>
+
+<% if flash_message.present?%>
+<div id="notice_erro" class="alert alert-danger alert-dismissible alerta" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong><%= flash_message %></strong>
+</div>
+<% end %>
 
 <h2>Rodovias
-<%= link_to '+', new_rodovium_path , class:"btn btn-primary"%>
+<%= link_to 'Adicionar', new_rodovium_path , class:"btn btn-primary adicionar"%>
 </h2>
+<br/>
+<div class='search-box'>
+  <form class='search-form' method='get' target='_top' id="search-form">
+    <input class='search-text' id='q' name='q' placeholder='Digite sua pesquisa' type='text'/>
+    <button class='search-button' id="submit" type='submit'><span>Buscar</span></button>
+  </form>
+</div>
+<br/>
 
 <table class="table">
   <thead>
     <tr>
       <th>Código</th>
-      <th colspan="2"></th>
+      <th>Descrição</th>
+      <th colspan="2" style="text-align: center;">Ações</th>
     </tr>
   </thead>
 
@@ -51,8 +72,9 @@
     <% @rodovia.each do |rodovium| %>
       <tr>
         <td><%= rodovium.id %></td>
-        <td><%= link_to 'Edit', edit_rodovium_path(rodovium), class:"btn btn-info" %></td>
-        <td><%= link_to 'Destroy', rodovium, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
+        <td><%= rodovium.descricao %></td>
+        <td><%= link_to 'Editar', edit_rodovium_path(rodovium), class:"btn btn-info" %></td>
+        <td><%= link_to 'Deletar', rodovium, method: :delete, data: { confirm: 'Deseja deletar?' }, class:"btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
