@@ -14,6 +14,7 @@ class QuadrasController < ApplicationController
         flash[:error] = '';
       end
     else 
+      flash[:error] = ''
       @quadras = Quadra.all
     end
   end

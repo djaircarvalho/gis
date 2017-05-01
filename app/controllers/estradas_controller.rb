@@ -4,7 +4,19 @@ class EstradasController < ApplicationController
   # GET /estradas
   # GET /estradas.json
   def index
-    @estradas = Estrada.all
+    if params[:q] and !params[:q].empty?
+      query = params[:q]
+      @estradas = Estrada.where("descricao LIKE ? ", "%#{query}%")
+      if @estradas.empty?
+        @estradas = Estrada.all
+        flash[:info] = 'Nenhuma estrada encontrada.'
+      else
+        flash[:info] = '';
+      end
+    else 
+      flash[:error] = '';
+      @estradas = Estrada.all
+    end
   end
 
   # GET /estradas/1
@@ -28,7 +40,7 @@ class EstradasController < ApplicationController
 
     respond_to do |format|
       if @estrada.save
-        format.html { redirect_to @estrada, notice: 'Estrada was successfully created.' }
+        format.html { redirect_to estradas_url, notice: 'Estrada criada com sucesso.' }
         format.json { render :show, status: :created, location: @estrada }
       else
         format.html { render :new }
@@ -42,7 +54,7 @@ class EstradasController < ApplicationController
   def update
     respond_to do |format|
       if @estrada.update(estrada_params)
-        format.html { redirect_to @estrada, notice: 'Estrada was successfully updated.' }
+        format.html { redirect_to estradas_url, notice: 'Estrada atualizada com sucesso.' }
         format.json { render :show, status: :ok, location: @estrada }
       else
         format.html { render :edit }
@@ -56,7 +68,7 @@ class EstradasController < ApplicationController
   def destroy
     @estrada.destroy
     respond_to do |format|
-      format.html { redirect_to estradas_url, notice: 'Estrada was successfully destroyed.' }
+      format.html { redirect_to estradas_url, notice: 'Estrada deletada com sucesso.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +81,6 @@ class EstradasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def estrada_params
-      params.require(:estrada).permit(:geom)
+      params.require(:estrada).permit(:descricao, :geom)
     end
 end

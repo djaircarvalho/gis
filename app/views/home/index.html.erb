@@ -32,6 +32,7 @@
     for (var i = 0; i < rios.length; i++) {
         var rio = rios[i];
         var obj = wkt.toObject(wkt.read(rio.geom));
+        obj.bindPopup(rio.descricao);
         
         obj.addTo(map);
       }
@@ -65,6 +66,7 @@
     for (var i = 0; i < lagos.length; i++) {
         var lago = lagos[i];
         var obj = wkt.toObject(wkt.read(lago.geom));
+        obj.bindPopup(lago.descricao);
         obj.setStyle({
           color: 'blue'
       });
@@ -76,7 +78,10 @@
     for (var i = 0; i < ferrovia.length; i++) {
         var ferrovium = ferrovia[i];
         var obj = wkt.toObject(wkt.read(ferrovium.geom));
-        
+        obj.bindPopup(ferrovium.descricao);
+        obj.setStyle({
+          color: 'brown'
+      });
         obj.addTo(map);
       }  
     
@@ -85,8 +90,9 @@
     for (var i = 0; i < pontes.length; i++) {
         var ponte = pontes[i];
         var obj = wkt.toObject(wkt.read(ponte.geom));
+        obj.bindPopup(ponte.descricao);
         obj.setStyle({
-          color: 'blue'
+          color: 'yellow'
         });
         
         obj.addTo(map);
@@ -97,6 +103,7 @@
     for (var i = 0; i < rodovias.length; i++) {
         var rodovia = rodovias[i];
         var obj = wkt.toObject(wkt.read(rodovia.geom));
+        obj.bindPopup(rodovia.descricao);
         obj.setStyle({
           color:'#696c70',
           dashArray: '20,15',
@@ -109,9 +116,9 @@
     for (var i = 0; i < estradas.length; i++) {
         var estrada = estradas[i];
         var obj = wkt.toObject(wkt.read(estrada.geom));
-        
+        obj.bindPopup(estrada.descricao);
         obj.setStyle({
-          color: 'blue'
+          color: 'orange'
         });
         obj.addTo(map);
     }

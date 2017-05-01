@@ -5,6 +5,7 @@ class LogradourosController < ApplicationController
   # GET /logradouros.json
   def index
     @logradouros = Logradouro.all
+    @quadras = Quadra.all
   end
 
   # GET /logradouros/1

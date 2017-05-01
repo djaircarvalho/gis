@@ -15,6 +15,7 @@ class LagosController < ApplicationController
       end
     else 
       @lagos = Lago.all
+      flash[:error] = ''
     end
   end
 

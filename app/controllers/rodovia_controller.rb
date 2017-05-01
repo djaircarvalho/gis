@@ -4,7 +4,19 @@ class RodoviaController < ApplicationController
   # GET /rodovia
   # GET /rodovia.json
   def index
-    @rodovia = Rodovium.all
+    if params[:q] and !params[:q].empty?
+      query = params[:q]
+      @rodovia = Rodovium.where("descricao LIKE ? ", "%#{query}%")
+      if @rodovia.empty?
+        @rodovia = Rodovium.all
+        flash[:info] = 'Nenhuma rodovia encontrada.'
+      else
+        flash[:info] = '';
+      end
+    else 
+      flash[:error] = '';
+      @rodovia = Rodovium.all
+    end
   end
 
   # GET /rodovia/1
@@ -28,7 +40,7 @@ class RodoviaController < ApplicationController
 
     respond_to do |format|
       if @rodovium.save
-        format.html { redirect_to @rodovium, notice: 'Rodovium was successfully created.' }
+        format.html { redirect_to rodovia_url, notice: 'Rodovia criada com sucesso.' }
         format.json { render :show, status: :created, location: @rodovium }
       else
         format.html { render :new }
@@ -42,7 +54,7 @@ class RodoviaController < ApplicationController
   def update
     respond_to do |format|
       if @rodovium.update(rodovium_params)
-        format.html { redirect_to @rodovium, notice: 'Rodovium was successfully updated.' }
+        format.html { redirect_to rodovia_url, notice: 'Rodovia atualizada com sucesso.' }
         format.json { render :show, status: :ok, location: @rodovium }
       else
         format.html { render :edit }
@@ -56,7 +68,7 @@ class RodoviaController < ApplicationController
   def destroy
     @rodovium.destroy
     respond_to do |format|
-      format.html { redirect_to rodovia_url, notice: 'Rodovium was successfully destroyed.' }
+      format.html { redirect_to rodovia_url, notice: 'Rodovia deletada com sucesso.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +81,6 @@ class RodoviaController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rodovium_params
-      params.require(:rodovium).permit(:geom)
+      params.require(:rodovium).permit(:descricao, :geom)
     end
 end
