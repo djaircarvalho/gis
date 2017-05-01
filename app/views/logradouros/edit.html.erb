@@ -6,10 +6,10 @@
     })
   %>
 </div>
-<h1>Editing Logradouro</h1>
+<h1>Editar Logradouro</h1>
 <%= render 'form', logradouro: @logradouro %>
 
-<%= link_to 'Back', logradouros_path, class:"btn btn-default" %>
+<%= link_to 'Voltar', logradouros_path, class:"btn btn-default" %>
 
 <script type="text/javascript">
 	function toWKT(layer) {
@@ -77,6 +77,34 @@
           drawnItems.addLayer(layer);
           $('#logradouro_localizacao').val(toWKT(layer));
       });
+
+      
+   var logradouros = JSON.parse('<%=escape_javascript @logradouros.to_json %>'.replace(/&quot;/g,'"'));
+        
+   var wkt = new Wkt.Wkt();
+   
+   for (var i = 0; i < logradouros.length; i++) {
+      var logradouro = logradouros[i];
+      var obj = wkt.toObject(wkt.read(logradouro.localizacao));
+      obj.setStyle({
+        color: 'yellow'
+      });
+      obj.bindPopup(logradouro.descricao);
+      obj.addTo(map);
+    }  
+
+    var quadras = JSON.parse('<%=escape_javascript @quadras.to_json %>'.replace(/&quot;/g,'"'));
+     
+    for (var i = 0; i < quadras.length; i++) {
+        var quadra = quadras[i];
+        var obj = wkt.toObject(wkt.read(quadra.localizacao));
+        obj.bindPopup(quadra.descricao);
+        obj.setStyle({
+          color: 'green'
+      });
+        obj.addTo(map);
+      } 
+
 
         
 </script>

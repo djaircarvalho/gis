@@ -46,7 +46,7 @@
         
         obj.bindPopup(logradouro.descricao);
         obj.setStyle({
-          color: 'red'
+          color: 'yellow'
         });
         obj.addTo(map);
       }
@@ -92,7 +92,7 @@
         var obj = wkt.toObject(wkt.read(ponte.geom));
         obj.bindPopup(ponte.descricao);
         obj.setStyle({
-          color: 'yellow'
+          color: 'red'
         });
         
         obj.addTo(map);

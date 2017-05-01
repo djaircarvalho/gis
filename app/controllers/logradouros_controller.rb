@@ -15,11 +15,15 @@ class LogradourosController < ApplicationController
 
   # GET /logradouros/new
   def new
+    @logradouros = Logradouro.all
+    @quadras = Quadra.all
     @logradouro = Logradouro.new
   end
 
   # GET /logradouros/1/edit
   def edit
+    @logradouros = Logradouro.all
+    @quadras = Quadra.all
   end
 
   # POST /logradouros
@@ -29,7 +33,7 @@ class LogradourosController < ApplicationController
 
     respond_to do |format|
       if @logradouro.save
-        format.html { redirect_to @logradouro, notice: 'Logradouro was successfully created.' }
+        format.html { redirect_to @logradouro, notice: 'Logradouro criado com sucesso.' }
         format.json { render :show, status: :created, location: @logradouro }
       else
         format.html { render :new }
@@ -43,7 +47,7 @@ class LogradourosController < ApplicationController
   def update
     respond_to do |format|
       if @logradouro.update(logradouro_params)
-        format.html { redirect_to @logradouro, notice: 'Logradouro was successfully updated.' }
+        format.html { redirect_to @logradouro, notice: 'Logradouro atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @logradouro }
       else
         format.html { render :edit }
@@ -57,7 +61,7 @@ class LogradourosController < ApplicationController
   def destroy
     @logradouro.destroy
     respond_to do |format|
-      format.html { redirect_to logradouros_url, notice: 'Logradouro was successfully destroyed.' }
+      format.html { redirect_to logradouros_url, notice: 'Logradouro deletado com sucesso.' }
       format.json { head :no_content }
     end
   end
@@ -70,6 +74,8 @@ class LogradourosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def logradouro_params
-      params.require(:logradouro).permit(:descricao, :localizacao,:quadra_direita_id,:quadra_esquerda_id)
+      params.require(:logradouro).permit(:descricao, :localizacao,
+        :quadra_direita_id,:quadra_esquerda_id,
+        :numeracao_direita, :numeracao_esquerda, :infraestrutura_existente)
     end
 end

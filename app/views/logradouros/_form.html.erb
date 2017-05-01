@@ -12,25 +12,43 @@
   <% end %>
 
  <div class="form-group">
-    <%= f.label 'Descrição', class:"control-label" %>
+    <%= f.label 'Descrição', class:"control-label col-md-2" %>
     <%= f.text_field :descricao , class:"form-control caixa"%>
   </div>
 
-  <div class="form-group">
-    <%= f.label 'Localização', class:"control-label" %>
+  <div class="form-group hidden">
+    <%= f.label 'Localização', class:"control-label col-md-2" %>
     <%= f.text_field :localizacao, class:"form-control caixa" %>
   </div>
+
   <div class="form-group">
-      <%= f.label :quadra_direita %>
-      <%= f.collection_select :quadra_direita_id, Quadra.all, :id,:descricao  %>
-     
+      <%= f.label :quadra_direita, class:"control-label col-md-2" %>
+      <%= f.collection_select :quadra_direita_id, Quadra.all, :id,:descricao, {}, class:"form-control caixa"  %> 
  <div>
+ <br/>
  <div class="form-group">
-      <%= f.label :quadra_esquerda %>
-     <%= f.collection_select :quadra_esquerda_id, Quadra.all, :id,:descricao  %>
+      <%= f.label :quadra_esquerda, class:"control-label col-md-2" %>
+     <%= f.collection_select :quadra_esquerda_id, Quadra.all, :id,:descricao, {},class:"form-control caixa"  %>
  <div>
+ <br/>
+
+   <div class="form-group">
+    <%= f.label 'Numeração a Direita', class:"control-label col-md-2" %>
+    <%= f.text_field :numeracao_direita, class:"form-control caixa" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Numeração a Esquerda', class:"control-label col-md-2" %>
+    <%= f.text_field :numeracao_esquerda, class:"form-control caixa" %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label 'Infraestrutura Existente', class:"control-label col-md-2" %>
+    <%= f.text_field :infraestrutura_existente, class:"form-control caixa" %>
+  </div>
+
   <div class="actions">
-    <%= f.submit 'Save', class:"btn btn-primary"%>
+    <%= f.submit 'Salvar', class:"btn btn-primary"%>
   </div>
   <br/>
 <% end %>

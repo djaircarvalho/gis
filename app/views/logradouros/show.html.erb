@@ -1,14 +1,85 @@
-<p id="notice"><%= notice %></p>
+<div id="map" class="mapa">
+  <%=
+    map(:center => {
+      :latlng => [-5.360528731202039, -42.67536163330079],
+      :zoom => 17
+    })
+  %>
+</div>
 
+
+<script type="text/javascript">
+
+	var drawnItems = new L.FeatureGroup();
+	var logradouro = JSON.parse('<%=escape_javascript @logradouro.to_json %>'.replace(/&quot;/g,'"'));
+	    
+	var wkt = new Wkt.Wkt();
+   
+	var obj = wkt.toObject(wkt.read(logradouro.localizacao));
+	obj.setStyle({
+	color: 'yellow'
+	});
+	obj.bindPopup(logradouro.descricao);
+	obj.addTo(map);
+
+	var quadra_direita = JSON.parse('<%=escape_javascript @logradouro.quadra_direita.to_json %>'.replace(/&quot;/g,'"'));
+
+	var obj = wkt.toObject(wkt.read(quadra_direita.localizacao));
+	obj.setStyle({
+	color: 'green'
+	});
+	obj.bindPopup(quadra_direita.descricao);
+	obj.addTo(map);
+
+	var quadra_esquerda = JSON.parse('<%=escape_javascript @logradouro.quadra_esquerda.to_json %>'.replace(/&quot;/g,'"'));
+
+	var obj = wkt.toObject(wkt.read(quadra_esquerda.localizacao));
+	obj.setStyle({
+	color: 'green'
+	});
+	obj.bindPopup(quadra_esquerda.descricao);
+	obj.addTo(map);
+    
+ 
+</script>
+
+<% if notice.present?%>
+<div id="notice" class="alert alert-success alert-dismissible alerta" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong><%= notice %></strong>
+</div>
+<% end %>
+
+<h2><%= @logradouro.descricao %></h2>
 <p>
-  <strong>Descricao:</strong>
-  <%= @logradouro.descricao %>
+  <strong>Código:</strong>
+  <%= @logradouro.id %>
 </p>
 
 <p>
-  <strong>Localizacao:</strong>
-  <%= @logradouro.localizacao %>
+  <strong>Quadra a Direita:</strong>
+  <%= @logradouro.quadra_direita.descricao %>
 </p>
 
-<%= link_to 'Edit', edit_logradouro_path(@logradouro) %> |
-<%= link_to 'Back', logradouros_path %>
+<p>
+  <strong>Quadra a Esquerda:</strong>
+  <%= @logradouro.quadra_esquerda.descricao %>
+</p>
+
+<p>
+  <strong>Numeração a Direita:</strong>
+  <%= @logradouro.numeracao_direita %>
+</p>
+
+<p>
+  <strong>Numeração a Esquerda:</strong>
+  <%= @logradouro.numeracao_esquerda %>
+</p>
+
+<p>
+  <strong>Infraestrutura Existente:</strong>
+  <%= @logradouro.infraestrutura_existente %>
+</p>
+
+<%= link_to 'Editar', edit_logradouro_path(@logradouro), class:"btn btn-info" %> 
+<%= link_to 'Voltar', logradouros_path, class:"btn btn-default" %>
