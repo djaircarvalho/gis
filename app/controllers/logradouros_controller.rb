@@ -4,8 +4,24 @@ class LogradourosController < ApplicationController
   # GET /logradouros
   # GET /logradouros.json
   def index
-    @logradouros = Logradouro.all
-    @quadras = Quadra.all
+
+    if params[:q] and !params[:q].empty?
+      query = params[:q]
+      @logradouros = Logradouro.where("descricao LIKE ? ", "%#{query}%")
+      @quadras = Quadra.all
+      if @logradouros.empty?
+        @logradouros = Logradouro.all
+        @quadras = Quadra.all
+        flash[:error] = 'Nenhum logradouro encontrado.'
+      else
+        flash[:error] = '';
+      end
+    else 
+      @logradouros = Logradouro.all
+      @quadras = Quadra.all
+      flash[:error] = ''
+    end
+    
   end
 
   # GET /logradouros/1
