@@ -2,21 +2,33 @@
   <%=
     map(:center => {
       :latlng => [-5.360528731202039, -42.67536163330079],
-      :zoom => 15
+      :zoom => 16
     });
   %>
 </div>
 
-<p id="notice"><%= notice %></p>
+<% if notice.present?%>
+<div id="notice" class="alert alert-success alert-dismissible alerta" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong><%= notice %></strong>
+</div>
+<% end %>
+
+<% if flash_message.present?%>
+<div id="notice_erro" class="alert alert-danger alert-dismissible alerta" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong><%= flash_message %></strong>
+</div>
+<% end %>
 
 <h2>Pontes
-<%= link_to '+', new_ponte_path , class:"btn btn-primary"%>
+<%= link_to 'Adicionar', new_ponte_path , class:"btn btn-primary adicionar"%>
 </h2>
 <br/>
-<div id='search-box'>
-  <form action='/search' id='search-form' method='get' target='_top'>
-    <input id='search-text' name='q' placeholder='Digite sua pesquisa' type='text'/>
-    <button id='search-button' type='submit'><span>Buscar</span></button>
+<div class='search-box'>
+  <form class='search-form' method='get' target='_top' id="search-form">
+    <input class='search-text' id='q' name='q' placeholder='Digite sua pesquisa' type='text'/>
+    <button class='search-button' id="submit" type='submit'><span>Buscar</span></button>
   </form>
 </div>
 <br/>
@@ -32,7 +44,9 @@
     for (var i = 0; i < pontes.length; i++) {
         var ponte = pontes[i];
         var obj = wkt.toObject(wkt.read(ponte.geom));
-        
+        obj.setStyle({
+          color: "yellow"
+        });
         obj.addTo(map);
       }  
     L.easyPrint({
@@ -47,8 +61,9 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Código
-      <th colspan="2"></th>
+      <th>Código</th>
+      <th>Descrição</th>
+      <th colspan="2" style="text-align: center;">Ações</th>
     </tr>
   </thead>
 
@@ -56,8 +71,9 @@
     <% @pontes.each do |ponte| %>
       <tr>
         <td><%= ponte.id %></td>
-        <td><%= link_to 'Edit', edit_ponte_path(ponte), class:"btn btn-info" %></td>
-        <td><%= link_to 'Destroy', ponte, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
+        <td><%= ponte.descricao %></td>
+        <td><%= link_to 'Editar', edit_ponte_path(ponte), class:"btn btn-info" %></td>
+        <td><%= link_to 'Deletar', ponte, method: :delete, data: { confirm: 'Deseja deletar?' }, class:"btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
