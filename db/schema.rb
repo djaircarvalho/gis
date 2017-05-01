@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(version: 20170430201553) do
     t.string    "tipo_de_pavimentacao"
     t.string    "existencia_de_guia_e_sarjeta"
     t.string    "fluxo_estimado_de_veiculos"
+    t.integer   "quadra_esquerda_id"
+    t.integer   "quadra_direita_id"
   end
 
   create_table "pontes", force: :cascade do |t|

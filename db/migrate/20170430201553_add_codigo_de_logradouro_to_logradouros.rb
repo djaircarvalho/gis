@@ -10,5 +10,8 @@ class AddCodigoDeLogradouroToLogradouros < ActiveRecord::Migration[5.0]
     add_column :logradouros, :tipo_de_pavimentacao, :string
     add_column :logradouros, :existencia_de_guia_e_sarjeta, :string
     add_column :logradouros, :fluxo_estimado_de_veiculos, :string
+    add_column :logradouros, :quadra_esquerda_id, :integer, index: true
+    add_column :logradouros, :quadra_direita_id, :integer, index: true
+    
     end
 end

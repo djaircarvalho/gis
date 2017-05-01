@@ -20,7 +20,15 @@
     <%= f.label 'Localização', class:"control-label" %>
     <%= f.text_field :localizacao, class:"form-control caixa" %>
   </div>
-
+  <div class="form-group">
+      <%= f.label :quadra_direita %>
+      <%= f.collection_select :quadra_direita_id, Quadra.all, :id,:descricao  %>
+     
+ <div>
+ <div class="form-group">
+      <%= f.label :quadra_esquerda %>
+     <%= f.collection_select :quadra_esquerda_id, Quadra.all, :id,:descricao  %>
+ <div>
   <div class="actions">
     <%= f.submit 'Save', class:"btn btn-primary"%>
   </div>

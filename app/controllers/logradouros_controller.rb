@@ -69,6 +69,6 @@ class LogradourosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def logradouro_params
-      params.require(:logradouro).permit(:descricao, :localizacao)
+      params.require(:logradouro).permit(:descricao, :localizacao,:quadra_direita_id,:quadra_esquerda_id)
     end
 end
