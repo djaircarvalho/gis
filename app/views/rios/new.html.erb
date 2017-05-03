@@ -66,8 +66,18 @@
           featureGroup: drawnItems
          }
         });
- 
- 		 map.addControl(drawControl);
+        var rios = JSON.parse('<%=escape_javascript @rios.to_json %>'.replace(/&quot;/g,'"'));
+
+        
+       var wkt = new Wkt.Wkt();
+       
+      for (var i = 0; i < rios.length; i++) {
+          var rio = rios[i];
+          var obj = wkt.toObject(wkt.read(rio.geom));
+          
+          obj.addTo(map);
+        }  
+ 		    map.addControl(drawControl);
 
         map.on('draw:created', function (e) {
             var type = e.layerType,

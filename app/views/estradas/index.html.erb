@@ -45,7 +45,9 @@
         var obj = wkt.toObject(wkt.read(estrada.geom));
         obj.bindPopup(estrada.descricao);
         obj.setStyle({
-          color: "orange"
+          color: "orange",
+          dashArray: '20,15',
+          lineJoin: 'round'
         })
         
         obj.addTo(map);

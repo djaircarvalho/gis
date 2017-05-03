@@ -26,6 +26,7 @@ class RiosController < ApplicationController
 
   # GET /rios/new
   def new
+    @rios = Rio.all
     @rio = Rio.new
   end
 
