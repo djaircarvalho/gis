@@ -27,6 +27,7 @@ class FerroviaController < ApplicationController
 
   # GET /ferrovia/new
   def new
+       @ferrovia = Ferrovium.all
     @ferrovium = Ferrovium.new
   end
 

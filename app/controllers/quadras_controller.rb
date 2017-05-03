@@ -26,6 +26,7 @@ class QuadrasController < ApplicationController
 
   # GET /quadras/new
   def new
+    @quadras = Quadra.all
     @quadra = Quadra.new
   end
 

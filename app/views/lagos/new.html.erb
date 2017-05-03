@@ -63,6 +63,19 @@
           featureGroup: drawnItems
          }
         });
+        var lagos = JSON.parse('<%=escape_javascript @lagos.to_json %>'.replace(/&quot;/g,'"'));
+
+        
+     var wkt = new Wkt.Wkt();
+     
+    for (var i = 0; i < lagos.length; i++) {
+        var lago = lagos[i];
+        var obj = wkt.toObject(wkt.read(lago.geom));
+        obj.setStyle({
+          color: 'blue'
+      });
+        obj.addTo(map);
+      }  
  
  		 map.addControl(drawControl);
 

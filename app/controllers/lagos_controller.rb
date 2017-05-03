@@ -26,6 +26,8 @@ class LagosController < ApplicationController
 
   # GET /lagos/new
   def new
+      @lagos = Lago.all
+    
     @lago = Lago.new
   end
 

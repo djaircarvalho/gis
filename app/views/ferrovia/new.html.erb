@@ -12,7 +12,7 @@
 
 <%= render 'form', ferrovium: @ferrovium %>
 
-<%= link_to 'Back', ferrovia_path, class:"btn btn-default" %>
+<%= link_to 'Voltar', ferrovia_path, class:"btn btn-default" %>
 
 <script type="text/javascript">
 	function toWKT(layer) {
@@ -64,6 +64,20 @@
           featureGroup: drawnItems
          }
         });
+        var ferrovia = JSON.parse('<%=escape_javascript @ferrovia.to_json %>'.replace(/&quot;/g,'"'));
+
+        
+     var wkt = new Wkt.Wkt();
+     
+    for (var i = 0; i < ferrovia.length; i++) {
+        var ferrovium = ferrovia[i];
+        var obj = wkt.toObject(wkt.read(ferrovium.geom));
+        obj.setStyle({
+          color: 'brown'
+      });
+        obj.addTo(map);
+      }  
+     
  
  		    map.addControl(drawControl);
 

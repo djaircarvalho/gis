@@ -63,6 +63,20 @@
           featureGroup: drawnItems
          }
         });
+        var quadras = JSON.parse('<%=escape_javascript @quadras.to_json %>'.replace(/&quot;/g,'"'));
+
+        
+     var wkt = new Wkt.Wkt();
+     
+    for (var i = 0; i < quadras.length; i++) {
+        var quadra = quadras[i];
+        var obj = wkt.toObject(wkt.read(quadra.localizacao));
+        obj.setStyle({
+          color: 'green'
+      });
+        obj.bindPopup(quadra.descricao);
+        obj.addTo(map);
+      }  
  
  		 map.addControl(drawControl);
 

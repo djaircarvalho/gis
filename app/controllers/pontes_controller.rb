@@ -26,6 +26,7 @@ class PontesController < ApplicationController
 
   # GET /pontes/new
   def new
+      @pontes = Ponte.all
     @ponte = Ponte.new
   end
 

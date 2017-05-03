@@ -26,6 +26,7 @@ class RodoviaController < ApplicationController
 
   # GET /rodovia/new
   def new
+      @rodovia = Rodovium.all
     @rodovium = Rodovium.new
   end
 

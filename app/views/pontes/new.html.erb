@@ -64,6 +64,21 @@
           featureGroup: drawnItems
          }
         });
+        var pontes = JSON.parse('<%=escape_javascript @pontes.to_json %>'.replace(/&quot;/g,'"'));
+
+        
+     var wkt = new Wkt.Wkt();
+     
+    for (var i = 0; i < pontes.length; i++) {
+        var ponte = pontes[i];
+        var obj = wkt.toObject(wkt.read(ponte.geom));
+        obj.bindPopup(ponte.descricao);
+
+        obj.setStyle({
+          color: "yellow"
+        });
+        obj.addTo(map);
+      }  
  
  		    map.addControl(drawControl);
 

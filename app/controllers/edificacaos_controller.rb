@@ -27,6 +27,7 @@ class EdificacaosController < ApplicationController
 
   # GET /edificacaos/new
   def new
+      @edificacaos = Edificacao.all
     @edificacao = Edificacao.new
   end
 

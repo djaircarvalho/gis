@@ -26,6 +26,7 @@ class EstradasController < ApplicationController
 
   # GET /estradas/new
   def new
+      @estradas = Estrada.all
     @estrada = Estrada.new
   end
 
