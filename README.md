@@ -6,7 +6,7 @@ Sistema de gerenciamento para a prefeitura de Demerval Lobão.
 
 Integrantes:
 
-Ana Catharina Mesquita
-Djair Carvalho
-Ismael Sarmento
-Rosenberg de Santana
+ Ana Catharina Mesquita
+ Djair Carvalho
+ Ismael Sarmento
+ Rosenberg de Santana
