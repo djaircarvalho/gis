@@ -1,24 +1,12 @@
 # Geo
 
-Sistema de gerenciamento para a prefeitura de Demerval Lobão. 
+Sistema de gerenciamento para a prefeitura de Demerval Lobão.
 
+## Trabalho Final de TESI
 
-Entidades:
+Integrantes:
 
-Quadra ok
-
-Rios ok
-
-Logradouro*
-
-Edificações ok
-
-Lagos ok
-
-Ferrovia ok
-
-Ponte ok
-
-Rodovia ok
-
-Estradas ok
+Ana Catharina Mesquita
+Djair Carvalho
+Ismael Sarmento
+Rosenberg de Santana
